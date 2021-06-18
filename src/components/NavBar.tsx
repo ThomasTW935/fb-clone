@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faHome, faPlay, faSearch, faStore, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const TABS = [
   {
@@ -13,7 +14,7 @@ const TABS = [
     icon: faPlay, 
   },
   {
-    name: "market",
+    name: "marketplace",
     icon: faStore, 
   },
   {
@@ -57,9 +58,9 @@ export default function NavBar() {
         </button> */}
         {
           TABS.map(tab=>
-            <button className={activeTab === tab.name ? 'activeTab': ''} onClick={ ()=> { setActiveTab(tab.name) } }>
+            <Link to={tab.name !== "home" ? `/${tab.name}`: '/'} className={activeTab === tab.name ? 'btn activeTab': 'btn'} onClick={ ()=> { setActiveTab(tab.name) } }>
               <FontAwesomeIcon className="icon" icon={tab.icon} size="lg" />
-            </button>
+            </Link>
           )
         }
       </div>

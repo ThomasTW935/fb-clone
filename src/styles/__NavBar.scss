@@ -29,11 +29,12 @@
     }
   }
   &__middle{
-    button{
+    .btn{
       padding: .75rem 1rem;
       margin: 0 .3rem;
       border-radius: 5px;
       background: white;
+      color:$grayFg;
       &:hover{
         background: $grayBg;
       }

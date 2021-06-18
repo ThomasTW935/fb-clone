@@ -82,7 +82,7 @@ select {
 }
 
 body {
-  background: #F0F2F5;
+  background: #f0f2f5;
 }
 
 button {
@@ -121,7 +121,7 @@ button {
 }
 
 .nav__left .search {
-  background: #F0F2F5;
+  background: #f0f2f5;
   border-radius: 1.5rem;
   padding: .45rem .75rem;
 }
@@ -137,18 +137,19 @@ button {
   background: transparent;
 }
 
-.nav__middle button {
+.nav__middle .btn {
   padding: .75rem 1rem;
   margin: 0 .3rem;
   border-radius: 5px;
   background: white;
+  color: #65676b;
 }
 
-.nav__middle button:hover {
-  background: #F0F2F5;
+.nav__middle .btn:hover {
+  background: #f0f2f5;
 }
 
-.nav__middle button:before {
+.nav__middle .btn:before {
   content: '';
   border-bottom: 2px solid #1877F2;
   -webkit-transition: .3s ease-in-out;
