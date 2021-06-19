@@ -3,8 +3,8 @@ import NavBar from './components/NavBar'
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './styles/main.css'
 import Home from './pages/Home'
-import Marketplace from './pages/marketplace'
-import Watch from './pages/watch'
+import Marketplace from './pages/Marketplace'
+import Watch from './pages/Watch'
 import Group from './pages/Group'
 
 export default function App() {
