@@ -90,21 +90,15 @@ export default function NavBar() {
 
       {/* Right */}
       <div className="nav__right">
-        {/* <button className="btn">
-          <FontAwesomeIcon icon={faPlus} size="lg" />
+        <button className='btn profile'>
+          <div className='image'>
+            <img src='../../testImg.jpg' alt='Profile'/>
+          </div>
+          <span>Daryl</span>
         </button>
-        <button className="btn">
-          <FontAwesomeIcon icon={faFacebookMessenger} size="lg" />
-        </button>
-        <button className="btn">
-          <FontAwesomeIcon icon={faBell} size="lg" />
-        </button>
-        <button className="btn">
-          <FontAwesomeIcon icon={faCaretDown} size="lg" />
-        </button> */}
         {SECONDARY_TABS.map((tab) => (
           <button
-            className={ secondaryTab === tab.name ? 'btn activeTab' : 'btn' }
+            className={secondaryTab === tab.name ? "btn activeTab" : "btn"}
             onClick={() => {
               setSecondaryTab(tab.name);
             }}

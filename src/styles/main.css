@@ -224,17 +224,54 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .nav__right .btn {
-  font-size: .75rem;
+  font-size: .85rem;
   background: #E4E6EB;
   border-radius: 50%;
-  padding: .5rem .75rem;
+  padding: .65rem .85rem;
   margin: 0 .2rem;
 }
 
 .nav__right .btn:hover {
   background: #d5d7df;
+}
+
+.nav__right .profile {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 1.5rem;
+  padding: 0;
+  padding: .45rem 1rem .45rem 2.3rem;
+  position: relative;
+}
+
+.nav__right .profile .image {
+  position: absolute;
+  left: 0;
+}
+
+.nav__right .profile .image img {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+}
+
+.nav__right .profile span {
+  font-size: 1rem;
+}
+
+@media only screen and (min-width: 800px) {
+  .nav__right .profile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 /*# sourceMappingURL=main.css.map */

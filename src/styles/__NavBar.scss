@@ -81,14 +81,40 @@
   }
   &__right{
     display:flex;
+    align-items:center;
     .btn{
-      font-size: .75rem;
+      font-size: .85rem;
       background: $grayBg-500;
       border-radius: 50%;
-      padding: .5rem .75rem;
+      padding: .65rem .85rem;
       margin: 0 .2rem;
       &:hover{
         background: $grayBg-700;
+      }
+    }
+    .profile{
+      display:none;
+      align-items:center;
+      border-radius: 1.5rem;
+      padding:0;
+      padding: .45rem 1rem .45rem 2.3rem;
+      position:relative;
+      .image{
+        position:absolute;
+        left:0;
+        img{
+          width: 1.85rem;
+          height:1.85rem;
+          border-radius: 50%;
+        }
+      }
+      span{
+        font-size: 1rem;
+      }
+    }
+    @media only screen and (min-width:800px){
+      .profile{
+        display:flex;
       }
     }
   }
