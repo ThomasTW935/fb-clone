@@ -1,30 +1,42 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faHome, faPlay, faSearch, faStore, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebook,
+  faFacebookMessenger,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faBell,
+  faCaretDown,
+  faHome,
+  faPlay,
+  faPlus,
+  faSearch,
+  faStore,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const TABS = [
   {
     name: "home",
-    icon: faHome, 
+    icon: faHome,
   },
   {
     name: "watch",
-    icon: faPlay, 
+    icon: faPlay,
   },
   {
     name: "marketplace",
-    icon: faStore, 
+    icon: faStore,
   },
   {
     name: "group",
-    icon: faUsers, 
+    icon: faUsers,
   },
-]
+];
 
 export default function NavBar() {
-  const [activeTab, setActiveTab] = useState(TABS[0].name)
+  const [activeTab, setActiveTab] = useState(TABS[0].name);
   return (
     <nav className="nav">
       {/* Left */}
@@ -44,29 +56,34 @@ export default function NavBar() {
 
       {/* Middle */}
       <div className="nav__middle">
-        {/* <button>
-          <FontAwesomeIcon className="icon" icon={faHome} size="lg" />
-        </button>
-        <button>
-          <FontAwesomeIcon className="icon" icon={faHome} size="lg" />
-        </button>
-        <button>
-          <FontAwesomeIcon className="icon" icon={faHome} size="lg" />
-        </button>
-        <button>
-          <FontAwesomeIcon className="icon" icon={faHome} size="lg" />
-        </button> */}
-        {
-          TABS.map(tab=>
-            <Link to={tab.name !== "home" ? `/${tab.name}`: '/'} className={activeTab === tab.name ? 'btn activeTab': 'btn'} onClick={ ()=> { setActiveTab(tab.name) } }>
-              <FontAwesomeIcon className="icon" icon={tab.icon} size="lg" />
-            </Link>
-          )
-        }
+        {TABS.map((tab) => (
+          <Link
+            to={tab.name !== "home" ? `/${tab.name}` : "/"}
+            className={activeTab === tab.name ? "btn activeTab" : "btn"}
+            onClick={() => {
+              setActiveTab(tab.name);
+            }}
+          >
+            <FontAwesomeIcon icon={tab.icon} size="lg" />
+          </Link>
+        ))}
       </div>
 
       {/* Right */}
-      <div className="nav__right"></div>
+      <div className="nav__right">
+        <button className='btn'>
+          <FontAwesomeIcon icon={faPlus} size="lg" />
+        </button>
+        <button className='btn'>
+          <FontAwesomeIcon icon={faFacebookMessenger} size="lg" />
+        </button>
+        <button className='btn'>
+          <FontAwesomeIcon icon={faBell} size="lg" />
+        </button>
+        <button className='btn'>
+          <FontAwesomeIcon icon={faCaretDown} size="lg" />
+        </button>
+      </div>
     </nav>
   );
 }

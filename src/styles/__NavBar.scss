@@ -14,7 +14,7 @@
       border-radius: 50%;
     }
     .search{
-      background: $grayBg;
+      background: $grayBg-300;
       border-radius: 1.5rem;
       padding: .45rem .75rem;
       &__icon{
@@ -30,13 +30,11 @@
   }
   &__middle{
     .btn{
-      padding: .75rem 1rem;
-      margin: 0 .3rem;
-      border-radius: 5px;
-      background: white;
       color:$grayFg;
+      margin: 0 .3rem;
+      padding: .75rem 1rem;
       &:hover{
-        background: $grayBg;
+        background: $grayBg-300;
       }
       &:before{
         content:'';
@@ -64,6 +62,15 @@
     }
   }
   &__right{
-    
+    .btn{
+      font-size: .75rem;
+      background: $grayBg-500;
+      border-radius: 50%;
+      padding: .5rem .75rem;
+      margin: 0 .2rem;
+      &:hover{
+        background: $grayBg-700;
+      }
+    }
   }
 }
