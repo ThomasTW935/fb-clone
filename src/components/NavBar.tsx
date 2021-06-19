@@ -16,7 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const TABS = [
+const PRIMARY_TABS = [
   {
     name: "home",
     icon: faHome,
@@ -34,9 +34,28 @@ const TABS = [
     icon: faUsers,
   },
 ];
+const SECONDARY_TABS = [
+  {
+    name: "plus",
+    icon: faPlus,
+  },
+  {
+    name: "messenger",
+    icon: faFacebookMessenger,
+  },
+  {
+    name: "bell",
+    icon: faBell,
+  },
+  {
+    name: "downArrow",
+    icon: faCaretDown,
+  },
+];
 
 export default function NavBar() {
-  const [activeTab, setActiveTab] = useState(TABS[0].name);
+  const [primaryTab, setPrimaryTab] = useState(PRIMARY_TABS[0].name);
+  const [secondaryTab, setSecondaryTab] = useState("");
   return (
     <nav className="nav">
       {/* Left */}
@@ -56,12 +75,12 @@ export default function NavBar() {
 
       {/* Middle */}
       <div className="nav__middle">
-        {TABS.map((tab) => (
+        {PRIMARY_TABS.map((tab) => (
           <Link
             to={tab.name !== "home" ? `/${tab.name}` : "/"}
-            className={activeTab === tab.name ? "btn activeTab" : "btn"}
+            className={primaryTab === tab.name ? "btn activeTab" : "btn"}
             onClick={() => {
-              setActiveTab(tab.name);
+              setPrimaryTab(tab.name);
             }}
           >
             <FontAwesomeIcon icon={tab.icon} size="lg" />
@@ -71,18 +90,28 @@ export default function NavBar() {
 
       {/* Right */}
       <div className="nav__right">
-        <button className='btn'>
+        {/* <button className="btn">
           <FontAwesomeIcon icon={faPlus} size="lg" />
         </button>
-        <button className='btn'>
+        <button className="btn">
           <FontAwesomeIcon icon={faFacebookMessenger} size="lg" />
         </button>
-        <button className='btn'>
+        <button className="btn">
           <FontAwesomeIcon icon={faBell} size="lg" />
         </button>
-        <button className='btn'>
+        <button className="btn">
           <FontAwesomeIcon icon={faCaretDown} size="lg" />
-        </button>
+        </button> */}
+        {SECONDARY_TABS.map((tab) => (
+          <button
+            className={ secondaryTab === tab.name ? 'btn activeTab' : 'btn' }
+            onClick={() => {
+              setSecondaryTab(tab.name);
+            }}
+          >
+            <FontAwesomeIcon icon={tab.icon} size="lg" />
+          </button>
+        ))}
       </div>
     </nav>
   );

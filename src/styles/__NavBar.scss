@@ -14,21 +14,36 @@
       border-radius: 50%;
     }
     .search{
+      display:flex;
+      align-items:center;
       background: $grayBg-300;
-      border-radius: 1.5rem;
-      padding: .45rem .75rem;
+      border-radius: 50%;
       &__icon{
         cursor:pointer;
         margin-right: .5rem;
       }
       &__input{
+        display:none;
         outline: none;
         border: none;
         background:transparent;
       }
     }
+    @media only screen and (min-width:800px){
+      .search{
+        border-radius: 1.5rem;
+        padding: .5rem;
+        &__input{
+          display:block;
+          outline: none;
+          border: none;
+          background:transparent;
+        }
+      }
+    }
   }
   &__middle{
+    display:none;
     .btn{
       color:$grayFg;
       margin: 0 .3rem;
@@ -60,8 +75,12 @@
         transform: scaleY(1);
       }
     }
+    @media only screen and (min-width:800px){
+      display:block;
+    }
   }
   &__right{
+    display:flex;
     .btn{
       font-size: .75rem;
       background: $grayBg-500;

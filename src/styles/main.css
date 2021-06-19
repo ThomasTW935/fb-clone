@@ -99,6 +99,10 @@ button {
   background: #f0f2f5;
 }
 
+.activeTab {
+  color: #1877F2;
+}
+
 .nav {
   padding: .75rem;
   display: -webkit-box;
@@ -130,9 +134,14 @@ button {
 }
 
 .nav__left .search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background: #f0f2f5;
-  border-radius: 1.5rem;
-  padding: .45rem .75rem;
+  border-radius: 50%;
 }
 
 .nav__left .search__icon {
@@ -141,9 +150,27 @@ button {
 }
 
 .nav__left .search__input {
+  display: none;
   outline: none;
   border: none;
   background: transparent;
+}
+
+@media only screen and (min-width: 800px) {
+  .nav__left .search {
+    border-radius: 1.5rem;
+    padding: .5rem;
+  }
+  .nav__left .search__input {
+    display: block;
+    outline: none;
+    border: none;
+    background: transparent;
+  }
+}
+
+.nav__middle {
+  display: none;
 }
 
 .nav__middle .btn {
@@ -185,6 +212,18 @@ button {
   height: 100%;
   -webkit-transform: scaleY(1);
           transform: scaleY(1);
+}
+
+@media only screen and (min-width: 800px) {
+  .nav__middle {
+    display: block;
+  }
+}
+
+.nav__right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .nav__right .btn {
