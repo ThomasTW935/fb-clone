@@ -6,8 +6,8 @@
   background: white;
   &__left{
     display:flex;
+    width: 25%;
     align-items:center;
-    gap: 1rem;
     .logo{
       border:none;
       cursor:pointer;
@@ -15,29 +15,46 @@
     }
     .search{
       display:flex;
+      gap: .7rem;
       align-items:center;
-      background: $grayBg-300;
-      border-radius: 50%;
       &__icon{
         cursor:pointer;
-        margin-right: .5rem;
       }
       &__input{
-        display:none;
-        outline: none;
-        border: none;
-        background:transparent;
+        background: $grayBg-300;
+        border-radius: 50%;
+        padding: .5rem;
+        display:flex;
+        align-items:center;
+        transform-origin: right;
+        transform: scaleX(.95);
+        transition:transform .3s ease;
+        &--focus{
+          transform: scaleX(1);
+        }
+        input{
+          display:none;
+          outline: none;
+          border: none;
+          background:transparent;
+        }
       }
     }
     @media only screen and (min-width:800px){
       .search{
-        border-radius: 1.5rem;
-        padding: .5rem;
+        &__icon{
+          margin-right: .5rem;
+        }
         &__input{
-          display:block;
-          outline: none;
-          border: none;
-          background:transparent;
+          border-radius: 1.5rem;
+          &--focus{
+            padding-left: .5rem;
+          }
+          input{
+            display:block;
+            background:transparent;
+            margin-left: .2rem;
+          }
         }
       }
     }
@@ -76,7 +93,8 @@
       }
     }
     @media only screen and (min-width:800px){
-      display:block;
+      display:flex;
+      justify-content:center;
     }
   }
   &__right{

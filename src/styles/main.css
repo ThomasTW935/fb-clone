@@ -103,6 +103,10 @@ button {
   color: #1877F2;
 }
 
+.hidden {
+  display: none;
+}
+
 .nav {
   padding: .75rem;
   display: -webkit-box;
@@ -121,10 +125,10 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 25%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 1rem;
 }
 
 .nav__left .logo {
@@ -137,19 +141,42 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  gap: .7rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: #f0f2f5;
-  border-radius: 50%;
 }
 
 .nav__left .search__icon {
   cursor: pointer;
-  margin-right: .5rem;
 }
 
 .nav__left .search__input {
+  background: #f0f2f5;
+  border-radius: 50%;
+  padding: .5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  -webkit-transform: scaleX(0.95);
+          transform: scaleX(0.95);
+  -webkit-transition: -webkit-transform .3s ease;
+  transition: -webkit-transform .3s ease;
+  transition: transform .3s ease;
+  transition: transform .3s ease, -webkit-transform .3s ease;
+}
+
+.nav__left .search__input--focus {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+.nav__left .search__input input {
   display: none;
   outline: none;
   border: none;
@@ -157,15 +184,19 @@ button {
 }
 
 @media only screen and (min-width: 800px) {
-  .nav__left .search {
-    border-radius: 1.5rem;
-    padding: .5rem;
+  .nav__left .search__icon {
+    margin-right: .5rem;
   }
   .nav__left .search__input {
+    border-radius: 1.5rem;
+  }
+  .nav__left .search__input--focus {
+    padding-left: .5rem;
+  }
+  .nav__left .search__input input {
     display: block;
-    outline: none;
-    border: none;
     background: transparent;
+    margin-left: .2rem;
   }
 }
 
@@ -216,7 +247,12 @@ button {
 
 @media only screen and (min-width: 800px) {
   .nav__middle {
-    display: block;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 

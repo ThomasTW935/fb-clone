@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
   faFacebookMessenger,
 } from "@fortawesome/free-brands-svg-icons";
 import {
+  faArrowLeft,
   faBell,
   faCaretDown,
   faHome,
@@ -56,20 +57,51 @@ const SECONDARY_TABS = [
 export default function NavBar() {
   const [primaryTab, setPrimaryTab] = useState(PRIMARY_TABS[0].name);
   const [secondaryTab, setSecondaryTab] = useState("");
+  const [searchOnFocus, setSearchInFocus] = useState(false);
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  function searchIconClick() {
+    setSearchInFocus(true);
+    searchRef.current?.focus();
+  }
   return (
     <nav className="nav">
       {/* Left */}
       <div className="nav__left">
-        <button className="logo">
-          <FontAwesomeIcon className="logo__icon" icon={faFacebook} size="2x" />
-        </button>
+        {!searchOnFocus && (
+          <button className="logo">
+            <FontAwesomeIcon
+              className="logo__icon"
+              icon={faFacebook}
+              size="2x"
+            />
+          </button>
+        )}
         <section className="search">
-          <FontAwesomeIcon className="search__icon" icon={faSearch} />
-          <input
-            type="search"
-            className="search__input"
-            placeholder="Search Facebook..."
-          />
+          {searchOnFocus && (
+            <FontAwesomeIcon size="lg" className="search__back" icon={faArrowLeft} />
+          )}
+          <div
+            className={
+              searchOnFocus
+                ? "search__input search__input--focus"
+                : "search__input"
+            }
+          >
+            <FontAwesomeIcon
+              onClick={searchIconClick}
+              className={searchOnFocus ? "search__icon hidden" : "search__icon"}
+              icon={faSearch}
+            />
+            <input
+              className=""
+              ref={searchRef}
+              type="search"
+              placeholder="Search Facebook..."
+              onFocus={() => setSearchInFocus(true)}
+              onBlur={() => setSearchInFocus(false)}
+            />
+          </div>
         </section>
       </div>
 
@@ -90,9 +122,9 @@ export default function NavBar() {
 
       {/* Right */}
       <div className="nav__right">
-        <button className='btn profile'>
-          <div className='image'>
-            <img src='../../testImg.jpg' alt='Profile'/>
+        <button className="btn profile">
+          <div className="image">
+            <img src="../../testImg.jpg" alt="Profile" />
           </div>
           <span>Daryl</span>
         </button>
