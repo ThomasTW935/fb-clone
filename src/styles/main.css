@@ -85,6 +85,10 @@ body {
   background: #f0f2f5;
 }
 
+main {
+  padding: 1rem;
+}
+
 button {
   cursor: pointer;
   border: none;
@@ -309,5 +313,76 @@ button {
     display: -ms-flexbox;
     display: flex;
   }
+}
+
+.home {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.contacts__head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: .5rem;
+}
+
+.contacts__list {
+  padding: 0;
+}
+
+.contacts__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .5rem;
+  gap: .5rem;
+  border-radius: 5px;
+}
+
+.contacts__item:hover {
+  background: #E4E6EB;
+}
+
+.contacts__item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.contacts__item .online {
+  position: relative;
+}
+
+.contacts__item .online::before {
+  content: '';
+  position: absolute;
+  height: 13px;
+  width: 13px;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.contacts__item .online::after {
+  content: '';
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  bottom: 1px;
+  right: 1px;
+  border-radius: 50%;
+  background-color: #31A24C;
 }
 /*# sourceMappingURL=main.css.map */

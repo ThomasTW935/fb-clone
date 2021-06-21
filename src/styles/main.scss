@@ -3,8 +3,10 @@ $grayBg-300: #f0f2f5;
 $grayBg-500: #E4E6EB;
 $grayBg-700: #d5d7df;
 $grayFg: #65676b;
+$greenBg-500: #31A24C;
 $primaryColor: #1877F2;
 
 @import '_reset';
 @import '_default';
 @import '_NavBar';
+@import '_Home'
