@@ -16,6 +16,8 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../context/AuthContext";
 
 const PRIMARY_TABS = [
   {
@@ -60,6 +62,10 @@ export default function NavBar() {
   const [searchOnFocus, setSearchInFocus] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
 
+  const { currentUser,
+    signup,
+    login,
+    logout,} = useAuth()
   function searchIconClick() {
     setSearchInFocus(true);
     searchRef.current?.focus();
@@ -107,8 +113,8 @@ export default function NavBar() {
 
       {/* Middle */}
       <div className="nav__middle">
-        {PRIMARY_TABS.map((tab) => (
-          <Link
+        {PRIMARY_TABS.map((tab,index) => (
+          <Link key={index}
             to={tab.name !== "home" ? `/${tab.name}` : "/"}
             className={primaryTab === tab.name ? "btn activeTab" : "btn"}
             onClick={() => {
@@ -128,8 +134,8 @@ export default function NavBar() {
           </div>
           <span>Daryl</span>
         </button>
-        {SECONDARY_TABS.map((tab) => (
-          <button
+        {SECONDARY_TABS.map((tab,index) => (
+          <button key={index}
             className={secondaryTab === tab.name ? "btn activeTab" : "btn"}
             onClick={() => {
               setSecondaryTab(tab.name);
@@ -138,6 +144,8 @@ export default function NavBar() {
             <FontAwesomeIcon icon={tab.icon} size="lg" />
           </button>
         ))}
+        
+        <button></button>
       </div>
     </nav>
   );
