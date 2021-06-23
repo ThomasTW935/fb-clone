@@ -3,7 +3,7 @@
   justify-content:space-between;
 }
 .contacts{
-  
+  display:none;
   &__head{
     display:flex;
     justify-content:space-between;
@@ -49,5 +49,8 @@
         background-color: $greenBg-500;
       }
     }
+  }
+  @media only screen and (min-width:800px){
+    display:block;
   }
 }
