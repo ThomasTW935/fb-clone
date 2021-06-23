@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./styles/main.css";
@@ -8,9 +8,11 @@ import Watch from "./pages/Watch";
 import Group from "./pages/Group";
 import { useAuth } from "./context/AuthContext";
 import Login from "./components/authentication/Login";
+import Signup from "./components/authentication/Signup";
 
 export default function App() {
   const { currentUser } = useAuth();
+  const [isLogin,setIsLogin] = useState(true)
   return (
     <div>
       <Router>
@@ -26,8 +28,8 @@ export default function App() {
           </>
         )}
         {!currentUser && (
-          <div>
-            <Login />
+          <div className='authentication'>
+            {isLogin ? <Login setIsLogin={setIsLogin} /> : <Signup setIsLogin={setIsLogin}/> }
           </div>
         )}
       </Router>

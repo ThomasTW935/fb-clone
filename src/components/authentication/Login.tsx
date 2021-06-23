@@ -1,13 +1,17 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Login() {
+type Props = {
+  setIsLogin: (arg0:boolean)=>void
+}
+
+export default function Login({setIsLogin}:Props) {
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const [loading,setLoading] = useState(false)
   return (
     <div>
-      <h2>Log In</h2>
+      <h2>Login</h2>
       <form>
         <section>
           <label>Email</label>
@@ -17,10 +21,10 @@ export default function Login() {
           <label>Password</label>
           <input type='password' ref={passwordRef}/>
         </section>
-        <button disabled={loading} type='submit'>Log In</button>
+        <button className='cta' disabled={loading} type='submit'>Login</button>
       </form>
-      <div>Create an account here <Link to='/signup'>Sign Up</Link></div>
-      <div>Forgot Password? <Link to='/forgot-password'>Reset Password</Link></div>
+      <div>Create an account here <button className='link' onClick={()=>setIsLogin(false)}>Sign Up</button></div>
+      <div>Forgot Password? <Link className='link' to='/forgot-password'>Reset Password</Link></div>
     </div>
   )
 }

@@ -1,0 +1,36 @@
+.authentication{
+  background:white;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  padding: 3rem;
+  form{
+    margin: 2.5rem 0 1rem;
+  }
+  section{
+    display:flex;
+    flex-direction:column;
+    gap: 5px;
+    margin: 1rem 0;
+    input{
+      border: 1px solid $grayBg-500;
+      border-radius: 15px;
+      padding: .4rem .75rem;
+    }
+  }
+  .cta{
+    width: 100%;
+    border-radius: 20px;
+    background: $primaryColor;
+    color: white;
+    padding: .3rem;
+  }
+  .link{
+    text-decoration: none;
+    background: none;
+    color: $linkColor;
+    font-weight: bold;
+  }
+}
