@@ -21,3 +21,15 @@ button{
 .hidden{
   display:none;
 }
+.guide{
+  display:flex;
+  flex-direction:column;
+  font-size: .8rem;
+  margin: .5rem 0 ;
+  .error{
+    color:red;
+  }
+  .valid{
+    color:green;
+  }
+}

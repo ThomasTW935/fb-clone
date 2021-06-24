@@ -111,6 +111,26 @@ button {
   display: none;
 }
 
+.guide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: .8rem;
+  margin: .5rem 0;
+}
+
+.guide .error {
+  color: red;
+}
+
+.guide .valid {
+  color: green;
+}
+
 .authentication {
   background: white;
   position: absolute;
@@ -149,7 +169,8 @@ button {
   border-radius: 20px;
   background: #1877F2;
   color: white;
-  padding: .3rem;
+  padding: .55rem;
+  margin: 1rem 0 0;
 }
 
 .authentication .link {
