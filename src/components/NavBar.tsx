@@ -16,7 +16,6 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useAuth } from "../context/AuthContext";
 
 const PRIMARY_TABS = [
@@ -145,7 +144,7 @@ export default function NavBar() {
           </button>
         ))}
         
-        <button></button>
+        <button onClick={logout}>Logout</button>
       </div>
     </nav>
   );

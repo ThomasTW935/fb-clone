@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": true,
     "skipLibCheck": false,
     "esModuleInterop": false,
@@ -13,8 +17,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
-    "types": ["node"]
+    "jsx": "react-jsx",
+    "types": [
+      "node"
+    ],
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["./src", "./firebase.ts"]
+  "include": [
+    "./src"
+  ]
 }

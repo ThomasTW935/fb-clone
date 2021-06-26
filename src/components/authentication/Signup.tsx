@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { ChangeEvent, FormEvent,  RefObject,  useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
@@ -7,7 +8,7 @@ type Props = {
 }
 
 export default function Signup({setIsLogin}:Props) {
-  const {signup} = useAuth()
+  const {signup,currentUser} = useAuth()
 
   const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
@@ -26,10 +27,20 @@ export default function Signup({setIsLogin}:Props) {
     try{
       setLoading(true)
       setError('')
-      await signup(emailRef.current?.value,passwordRef.current?.value)
+      const firebaseResponse = await signup(emailRef.current?.value,passwordRef.current?.value)
+      console.log(emailRef.current?.value)
+      const newUser = {
+        name: nameRef.current?.value,
+        firebase_uid: firebaseResponse.user.uid
+      }
+      console.log(nameRef.current?.value)
+      // console.log(firebaseResponse.user.uid)
+      const response = await axios.post('/api/users', newUser)
+      console.log(response)
     }catch{
       setError('Failed to create an account')
     }
+    setLoading(false)
   }
 
   function handlePasswordChange(e:ChangeEvent<HTMLInputElement>){
@@ -46,8 +57,8 @@ export default function Signup({setIsLogin}:Props) {
     if(!hasBothLettersAndNumbers(value)) handleGuide(bothLetNumRef,error,valid)
     else handleGuide(bothLetNumRef,valid,error)
 
-    if(!hasSpecialChar(value)) handleGuide(specialCharRef,error,valid)
-    else handleGuide(specialCharRef,valid,error)
+    // if(!hasSpecialChar(value)) handleGuide(specialCharRef,error,valid)
+    // else handleGuide(specialCharRef,valid,error)
 
     function hasLowerCase(str:string){
       return str.toUpperCase() != str
@@ -70,8 +81,17 @@ export default function Signup({setIsLogin}:Props) {
   function handleGuide(el:RefObject<HTMLInputElement>, classToAdd:string, classToRemove:string){
     el.current?.classList.add(classToAdd)
     el.current?.classList.remove(classToRemove)
+    if(classToAdd == 'error') return setLoading(true)
+    setLoading(false)
   }
-
+  async function testAxios(){
+    try{
+      const response = await axios.get('/api/users')
+      console.log(response)
+    }catch(err) {
+      console.log(err)
+    }
+  }
   return (
     <div>
       <h2>Sign Up</h2>
@@ -91,9 +111,10 @@ export default function Signup({setIsLogin}:Props) {
             <span ref={minimumRef}>*Minimum of 8 Characters</span>
             <span ref={bothUpLowRef}>*A mixture of both uppercase and lowercase letters </span>
             <span ref={bothLetNumRef}>*A mixture of letters and numbers.</span>
-            <span ref={specialCharRef}>*Inclusion of at least one special character, e.g., ! @ # ? ] Note: do not use &#60; or &#62;</span>
+            <span ref={specialCharRef}>*Inclusion of at least one special character, e.g., ! @ # ?  Note: do not use &#60; or &#62;</span>
           </div>
         </section>
+        <button onClick={testAxios}>test</button>
         <button className='cta' disabled={loading} type='submit'>Sign Up</button>
       </form>
       <div>Already have an Account? <button className='link' onClick={()=>setIsLogin(true)}>Sign In</button></div>
