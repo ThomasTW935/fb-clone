@@ -1,6 +1,5 @@
 import axios from 'axios'
-import React, { ChangeEvent, FormEvent,  RefObject,  useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { ChangeEvent, FormEvent,  RefObject,  useRef, useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 
 type Props = {
@@ -8,7 +7,7 @@ type Props = {
 }
 
 export default function Signup({setIsLogin}:Props) {
-  const {signup,currentUser} = useAuth()
+  const {signup} = useAuth()
 
   const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
@@ -27,16 +26,13 @@ export default function Signup({setIsLogin}:Props) {
     try{
       setLoading(true)
       setError('')
+      const name = nameRef.current?.value
       const firebaseResponse = await signup(emailRef.current?.value,passwordRef.current?.value)
-      console.log(emailRef.current?.value)
       const newUser = {
-        name: nameRef.current?.value,
+        name: name,
         firebase_uid: firebaseResponse.user.uid
       }
-      console.log(nameRef.current?.value)
-      // console.log(firebaseResponse.user.uid)
-      const response = await axios.post('/api/users', newUser)
-      console.log(response)
+      await axios.post('/api/users', newUser)
     }catch{
       setError('Failed to create an account')
     }
@@ -61,27 +57,22 @@ export default function Signup({setIsLogin}:Props) {
     // else handleGuide(specialCharRef,valid,error)
 
     function hasLowerCase(str:string){
-      return str.toUpperCase() != str
+      return str.toUpperCase() !== str
     }
     function hasUpperCase(str:string){
-      return str.toLowerCase() != str
+      return str.toLowerCase() !== str
     }
     function hasBothLettersAndNumbers(str:string){
       let regex = /[a-zA-Z]/
       let hasNumbers = /\d/
       return regex.test(str) && hasNumbers.test(str)
     }
-    function hasSpecialChar(str:string){
-      let regex = /[~@#$^*()_+=[\]{}|\\,.?: -]/
-      let notAllowed = /[<>'"/;`%]/
-      return regex.test(str) && !notAllowed.test(str)
-    }
   }
 
   function handleGuide(el:RefObject<HTMLInputElement>, classToAdd:string, classToRemove:string){
     el.current?.classList.add(classToAdd)
     el.current?.classList.remove(classToRemove)
-    if(classToAdd == 'error') return setLoading(true)
+    if(classToAdd === 'error') return setLoading(true)
     setLoading(false)
   }
   async function testAxios(){
@@ -95,6 +86,7 @@ export default function Signup({setIsLogin}:Props) {
   return (
     <div>
       <h2>Sign Up</h2>
+      <div className='error'>{error}</div>
       <form onSubmit={handleSubmit}>
         <section>
           <label>Name</label>
