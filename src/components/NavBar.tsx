@@ -17,6 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import testImg from '../testImg.jpg'
 
 const PRIMARY_TABS = [
   {
@@ -61,10 +62,7 @@ export default function NavBar() {
   const [searchOnFocus, setSearchInFocus] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const { currentUser,
-    signup,
-    login,
-    logout,} = useAuth()
+  const { logout,} = useAuth()
   function searchIconClick() {
     setSearchInFocus(true);
     searchRef.current?.focus();
@@ -129,7 +127,7 @@ export default function NavBar() {
       <div className="nav__right">
         <button className="btn profile">
           <div className="image">
-            <img src="../../testImg.jpg" alt="Profile" />
+            <img src={testImg} alt="Profile" />
           </div>
           <span>Daryl</span>
         </button>
