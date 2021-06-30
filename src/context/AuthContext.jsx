@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext, useState, useEffect, createContext } from "react";
 import { auth } from "../firebase";
 
@@ -28,9 +29,17 @@ export function AuthProvider({ children }) {
   function updatePassword(password) {
     return currentUser?.updatePassword(password);
   }
+  function updateProfile(name, photoUrl = null){
+    return currentUser.updateProfile({displayName: name})
+  }
 
   useEffect(() => {
-    const unsubcribe = auth.onAuthStateChanged((user) => {
+    const unsubcribe = auth.onAuthStateChanged( async (user) => {
+      if(user){
+        const response = await axios.get(`/api/users/${user.uid}`)
+        console.log(response.data)
+        user["name"] = response.data.name
+      }
       setCurrentUser(user);
       setLoading(false);
     });
@@ -45,6 +54,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    updateProfile
   };
   return (
     <AuthContext.Provider value={value}>

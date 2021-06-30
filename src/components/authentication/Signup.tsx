@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function Signup({setIsLogin}:Props) {
-  const {signup} = useAuth()
+  const {signup, updateProfile} = useAuth()
 
   const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
