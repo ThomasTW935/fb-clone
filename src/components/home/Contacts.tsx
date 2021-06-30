@@ -44,7 +44,7 @@ export default function Contacts() {
       {contacts.map((contact,index) => (
         <li key={index} className="contacts__item">
           <div className={contact.online ? 'online' : ''}>
-            <img src={contact.profile_picture} alt="profile" />
+            <img src={contact.profile_picture} alt="profile" className='profile__image' />
           </div>
           <span>{contact.name}</span>
         </li>
