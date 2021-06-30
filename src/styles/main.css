@@ -94,9 +94,14 @@ button {
   border: none;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+}
+
 .btn {
   border-radius: 5px;
-  background: white;
+  background: none;
 }
 
 .btn:hover {
@@ -119,8 +124,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  font-size: .8rem;
-  margin: .5rem 0;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
 }
 
 .guide .error {
@@ -129,6 +134,13 @@ button {
 
 .guide .valid {
   color: green;
+}
+
+.profile__image {
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
 
 .authentication {
@@ -188,9 +200,6 @@ button {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   background: white;
 }
 
@@ -198,10 +207,10 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 25%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 0 .5rem;
 }
 
 .nav__left .logo {
@@ -275,6 +284,7 @@ button {
 
 .nav__middle {
   display: none;
+  width: 50%;
 }
 
 .nav__middle .btn {
@@ -361,15 +371,9 @@ button {
   position: relative;
 }
 
-.nav__right .profile .image {
+.nav__right .profile__imageCon {
   position: absolute;
   left: 0;
-}
-
-.nav__right .profile .image img {
-  width: 1.85rem;
-  height: 1.85rem;
-  border-radius: 50%;
 }
 
 .nav__right .profile span {
@@ -388,13 +392,58 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  gap: 1rem;
+}
+
+.home .sideNav, .home .contacts {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 30ch;
+          flex: 1 0 30ch;
+}
+
+.sideNav {
+  display: none;
+  padding: 1rem;
+  padding-left: 0;
+}
+
+.sideNav__list {
+  width: 100%;
+}
+
+.sideNav__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .5rem;
+  gap: .5rem;
+  border-radius: 5px;
+}
+
+.sideNav__item:hover {
+  background: #E4E6EB;
+}
+
+@media only screen and (min-width: 1200px) {
+  .sideNav {
+    display: block;
+  }
+}
+
+.newsFeed > div {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .contacts {
   display: none;
+  padding: 0 1rem 1rem;
 }
 
 .contacts__head {
@@ -405,10 +454,6 @@ button {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: .5rem;
-}
-
-.contacts__list {
-  padding: 0;
 }
 
 .contacts__item {
@@ -427,12 +472,6 @@ button {
   background: #E4E6EB;
 }
 
-.contacts__item img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
 .contacts__item .online {
   position: relative;
 }
@@ -440,8 +479,8 @@ button {
 .contacts__item .online::before {
   content: '';
   position: absolute;
-  height: 13px;
-  width: 13px;
+  height: .8rem;
+  width: .8rem;
   bottom: 0;
   right: 0;
   border-radius: 50%;
@@ -451,8 +490,8 @@ button {
 .contacts__item .online::after {
   content: '';
   position: absolute;
-  height: 10px;
-  width: 10px;
+  height: .6rem;
+  width: .6rem;
   bottom: 1px;
   right: 1px;
   border-radius: 50%;

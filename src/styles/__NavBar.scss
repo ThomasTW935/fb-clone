@@ -1,13 +1,13 @@
 .nav{
   padding: .75rem;
   display:flex;
-  justify-content: space-between;
-  align-items:center;
+  // grid-template-columns: 1fr 2fr 1fr;
+  justify-content:space-between;
   background: white;
   &__left{
     display:flex;
-    width: 25%;
     align-items:center;
+    padding: 0 .5rem;
     .logo{
       border:none;
       cursor:pointer;
@@ -40,7 +40,7 @@
         }
       }
     }
-    @media only screen and (min-width:800px){
+    @media only screen and (min-width:$md){
       .search{
         &__icon{
           margin-right: .5rem;
@@ -61,6 +61,7 @@
   }
   &__middle{
     display:none;
+    width: 50%;
     .btn{
       color:$grayFg;
       margin: 0 .3rem;
@@ -92,7 +93,7 @@
         transform: scaleY(1);
       }
     }
-    @media only screen and (min-width:800px){
+    @media only screen and (min-width:$md){
       display:flex;
       justify-content:center;
     }
@@ -117,20 +118,15 @@
       padding:0;
       padding: .45rem 1rem .45rem 2.3rem;
       position:relative;
-      .image{
+      &__imageCon{
         position:absolute;
         left:0;
-        img{
-          width: 1.85rem;
-          height:1.85rem;
-          border-radius: 50%;
-        }
       }
       span{
         font-size: 1rem;
       }
     }
-    @media only screen and (min-width:800px){
+    @media only screen and (min-width:$md){
       .profile{
         display:flex;
       }

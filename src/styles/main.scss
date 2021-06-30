@@ -7,6 +7,12 @@ $linkColor: #7E6BF2;
 $greenBg-500: #31A24C;
 $primaryColor: #1877F2;
 
+$boxShadow: rgba(0,0,0,0.2);
+
+// Screen Size 
+$md: 800px;
+$lg: 1200px;
+
 @import '_reset';
 @import '_default';
 @import '_authentication';
