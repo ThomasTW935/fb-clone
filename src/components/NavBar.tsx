@@ -7,17 +7,17 @@ import {
 import {
   faArrowLeft,
   faBell,
-  faCaretDown,
   faHome,
-  faPlay,
   faPlus,
   faSearch,
+  faCaretDown,
+  faPlay,
   faStore,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import testImg from '../testImg.jpg'
+import testImg from "../testImg.jpg";
 
 const PRIMARY_TABS = [
   {
@@ -62,11 +62,12 @@ export default function NavBar() {
   const [searchOnFocus, setSearchInFocus] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const { logout,} = useAuth()
+  const { logout, currentUser } = useAuth();
   function searchIconClick() {
     setSearchInFocus(true);
     searchRef.current?.focus();
   }
+  
   return (
     <nav className="nav">
       {/* Left */}
@@ -82,7 +83,11 @@ export default function NavBar() {
         )}
         <section className="search">
           {searchOnFocus && (
-            <FontAwesomeIcon size="lg" className="search__back" icon={faArrowLeft} />
+            <FontAwesomeIcon
+              size="lg"
+              className="search__back"
+              icon={faArrowLeft}
+            />
           )}
           <div
             className={
@@ -110,8 +115,9 @@ export default function NavBar() {
 
       {/* Middle */}
       <div className="nav__middle">
-        {PRIMARY_TABS.map((tab,index) => (
-          <Link key={index}
+        {PRIMARY_TABS.map((tab, index) => (
+          <Link
+            key={index}
             to={tab.name !== "home" ? `/${tab.name}` : "/"}
             className={primaryTab === tab.name ? "btn activeTab" : "btn"}
             onClick={() => {
@@ -126,13 +132,14 @@ export default function NavBar() {
       {/* Right */}
       <div className="nav__right">
         <button className="btn profile">
-          <div className="image">
-            <img src={testImg} alt="Profile" />
+          <div className="profile__imageCon">
+            <img src={testImg} alt="Profile" className='profile__image' />
           </div>
-          <span>Daryl</span>
+          <span>{currentUser.name}</span>
         </button>
-        {SECONDARY_TABS.map((tab,index) => (
-          <button key={index}
+        {SECONDARY_TABS.map((tab, index) => (
+          <button
+            key={index}
             className={secondaryTab === tab.name ? "btn activeTab" : "btn"}
             onClick={() => {
               setSecondaryTab(tab.name);
@@ -141,7 +148,7 @@ export default function NavBar() {
             <FontAwesomeIcon icon={tab.icon} size="lg" />
           </button>
         ))}
-        
+
         <button onClick={logout}>Logout</button>
       </div>
     </nav>
