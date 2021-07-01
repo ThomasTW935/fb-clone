@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import NavBar from "../src/components/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./styles/main.css";
-import Home from "./pages/Home";
-import Marketplace from "./pages/Marketplace";
-import Watch from "./pages/Watch";
-import Group from "./pages/Group";
-import { useAuth } from "./context/AuthContext";
+import Home from "./pages/home/Home";
+import Marketplace from "./pages/marketplace/Marketplace";
+import Watch from "./pages/watch/Watch";
+import Group from "./pages/group/Group";
+import { useAuth } from "./auth/AuthContext";
 import Login from "../src/components/authentication/Login";
 import Signup from "../src/components/authentication/Signup";
 
