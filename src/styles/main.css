@@ -171,7 +171,7 @@ ul {
 }
 
 .authentication section input {
-  border: 1px solid #E4E6EB;
+  border: 1px solid #e0e4eb;
   border-radius: 15px;
   padding: .4rem .75rem;
 }
@@ -288,7 +288,7 @@ ul {
 }
 
 .nav__middle .btn {
-  color: #65676b;
+  color: #667a99;
   margin: 0 .3rem;
   padding: .75rem 1rem;
 }
@@ -350,14 +350,14 @@ ul {
 
 .nav__right .btn {
   font-size: .85rem;
-  background: #E4E6EB;
+  background: #e0e4eb;
   border-radius: 50%;
   padding: .65rem .85rem;
   margin: 0 .2rem;
 }
 
 .nav__right .btn:hover {
-  background: #d5d7df;
+  background: #d1d7e0;
 }
 
 .nav__right .profile {
@@ -393,44 +393,6 @@ ul {
   display: -ms-flexbox;
   display: flex;
   gap: 1rem;
-}
-
-.home .sideNav, .home .contacts {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 0 30ch;
-          flex: 1 0 30ch;
-}
-
-.sideNav {
-  display: none;
-  padding: 1rem;
-  padding-left: 0;
-}
-
-.sideNav__list {
-  width: 100%;
-}
-
-.sideNav__item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: .5rem;
-  gap: .5rem;
-  border-radius: 5px;
-}
-
-.sideNav__item:hover {
-  background: #E4E6EB;
-}
-
-@media only screen and (min-width: 1200px) {
-  .sideNav {
-    display: block;
-  }
 }
 
 .newsFeed > div {
@@ -474,7 +436,7 @@ ul {
 }
 
 .contacts__item:hover {
-  background: #E4E6EB;
+  background: #e0e4eb;
 }
 
 .contacts__item .online {
