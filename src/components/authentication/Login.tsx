@@ -1,6 +1,6 @@
 import React, { FormEvent, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../auth/AuthContext'
 
 type Props = {
   setIsLogin: (arg0:boolean)=>void

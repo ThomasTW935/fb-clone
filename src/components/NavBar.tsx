@@ -16,8 +16,8 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import testImg from "../testImg.jpg";
+import { useAuth } from "../auth/AuthContext";
+import testImg from "../assets/images/testImg.jpg";
 
 const PRIMARY_TABS = [
   {
