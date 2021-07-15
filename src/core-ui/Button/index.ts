@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 
 interface IProps {
-  isActive: boolean
+  isactive: boolean
 }
 
 const baseButtonStyle = css`
@@ -21,12 +21,12 @@ const PrimaryTab = styled(Link)<IProps>`
   width: 100%;
   position: relative;
   color: ${(props) =>
-    props.isActive
+    props.isactive
       ? props.theme.palette.primary.main
       : props.theme.palette.common.grey.normal};
   &:hover {
     background: ${(props) =>
-      props.isActive ? '' : props.theme.palette.common.grey.light};
+      props.isactive ? '' : props.theme.palette.common.grey.light};
   }
   &:before {
     content: '';
@@ -39,7 +39,7 @@ const PrimaryTab = styled(Link)<IProps>`
     left: 0;
     width: 100%;
     height: 100%;
-    transform: ${(props) => (props.isActive ? 'scaleY(1)' : `scaleY(0)`)};
+    transform: ${(props) => (props.isactive ? 'scaleY(1)' : `scaleY(0)`)};
   }
 `
 
@@ -47,7 +47,7 @@ const SecondaryTab = styled.button<IProps>`
   font-size: 0.85rem;
   ${baseButtonStyle}
   color: ${(props) =>
-    props.isActive
+    props.isactive
       ? props.theme.palette.primary.main
       : `props.theme.palette.common.black`};
   border-radius: 50%;
