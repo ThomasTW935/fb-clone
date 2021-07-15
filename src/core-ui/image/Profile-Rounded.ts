@@ -9,6 +9,7 @@ interface IProps {
 interface IImage {
   src: string
   alt: string
+  size: number
 }
 
 const greenBg = '#31A24C'
@@ -42,9 +43,10 @@ const ImgCon: IImgCon = styled.div<IProps>`
 `
 
 const Image = styled.img<IImage>`
-  min-width: 32px;
-  width: 32px;
-  height: 32px;
+  font-size: ${(props) => (props.size ? `${props.size}px` : '16px')};
+  min-width: 2em;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
 `
 
