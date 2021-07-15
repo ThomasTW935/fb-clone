@@ -19,7 +19,7 @@ const Con: ICon = styled.div`
   background: rgba(243, 243, 244, 0.5);
 `
 
-const form = styled.div`
+const form = styled.form`
   position: absolute;
   min-width: ${width}px;
   /* min-height: ${height}px; */

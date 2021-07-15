@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
+import { useAuth } from '../../auth/AuthContext'
+import useCreatePost from '../../hooks/useCreatePost'
 import Con from './Modal.style'
 
 interface IProps {
@@ -7,22 +9,40 @@ interface IProps {
 }
 
 export default function Modal({ open, setOpen }: IProps) {
+  const { currentUser } = useAuth()
+
+  const [postData, setPostData] = useState({
+    privacy: 'Public',
+    content: '',
+    userId: currentUser._id,
+  })
+  const { loading, handleSubmitPost } = useCreatePost(postData)
+
   function closeModal() {
     setOpen(false)
+  }
+  function handleContentChange(e: ChangeEvent<HTMLTextAreaElement>) {
+    setPostData({
+      ...postData,
+      content: e.target.value,
+    })
   }
 
   return (
     <>
       {open && (
         <Con>
-          <Con.Form>
+          <Con.Form onSubmit={handleSubmitPost}>
             <Con.Head>
               <p>Create Post</p>
               <button onClick={closeModal}>&times;</button>
             </Con.Head>
             <Con.Body>
-              <textarea placeholder="What's on your mind?"></textarea>
-              <button>Post</button>
+              <textarea
+                onChange={handleContentChange}
+                placeholder="What's on your mind?"
+              ></textarea>
+              <button disabled={loading}>Post</button>
             </Con.Body>
           </Con.Form>
         </Con>
