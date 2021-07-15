@@ -16,7 +16,10 @@ import { SIZE } from '../../helper/enum'
 import { CONTACTS } from '../../data'
 import Main from './Main.style'
 import Modal from '../../components/Modal'
-import { useState } from 'react'
+import Post from '../../components/Post'
+import { useEffect, useState } from 'react'
+import useFetchPost from '../../hooks/useFetchPost'
+import { IPost } from '../../interfaces'
 
 const SIDENAV_ITEMS = [
   {
@@ -49,6 +52,16 @@ const SIDENAV_ITEMS = [
 export default function Home() {
   const { currentUser } = useAuth()
   const [openModal, setOpenModal] = useState(false)
+  const [posts, setPosts] = useState([])
+  const { fetchPosts } = useFetchPost()
+  useEffect(() => {
+    async function loadPosts() {
+      const res = await fetchPosts()
+      setPosts(res)
+    }
+    loadPosts()
+    console.log(posts)
+  }, [])
   return (
     <Main>
       {/* Left */}
@@ -80,18 +93,14 @@ export default function Home() {
           </section>
           <section></section>
         </Main.NewsFeed.Head>
-        <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-          laudantium provident sed magni mollitia asperiores nihil sequi quis
-          molestiae laborum voluptas, hic tempore ab excepturi adipisci
-          necessitatibus voluptatum sapiente at? Quibusdam facere possimus
-          pariatur sed sequi tempore nulla neque! Eum cum quo soluta porro
-          doloribus nesciunt natus culpa nihil eaque maiores, libero adipisci
-          sequi voluptate velit ducimus facilis neque tempore!
-        </div>
+        <Main.NewsFeed.Post>
+          {posts.map((post: IPost) => (
+            <Post key={post._id} post={post} />
+          ))}
+        </Main.NewsFeed.Post>
       </Main.NewsFeed>
+
       {/* Right */}
-      {/* <Contacts /> */}
       <Main.SideNav size={SIZE.md}>
         <Main.Head>
           <span>Contacts</span>
