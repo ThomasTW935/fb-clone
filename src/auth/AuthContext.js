@@ -37,8 +37,8 @@ export function AuthProvider({ children }) {
     const unsubcribe = auth.onAuthStateChanged( async (user) => {
       if(user){
         const response = await axios.get(`/api/users/${user.uid}`)
-        console.log(response.data)
         user["name"] = response.data.name
+        user["_id"] = response.data._id
       }
       setCurrentUser(user);
       setLoading(false);
