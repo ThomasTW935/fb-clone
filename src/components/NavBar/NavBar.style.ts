@@ -1,4 +1,4 @@
-import styled, { css, StyledComponentBase } from 'styled-components'
+import styled, { StyledComponentBase } from 'styled-components'
 import ImgCon from '../../core-ui/image/Profile-Rounded'
 import List from '../../core-ui/List.style'
 import { PrimaryTab, SecondaryTab } from '../../core-ui/Button'
