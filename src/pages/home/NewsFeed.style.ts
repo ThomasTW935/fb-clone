@@ -9,17 +9,16 @@ interface INewsFeed extends StyledComponentBase<any, {}> {
 
 const NewsFeed: INewsFeed = styled.section`
   max-width: 90ch;
-  & > div {
-    background: white;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 10px;
-    box-shadow: 0 1px 2px $boxShadow;
-  }
+  width: 100%;
 `
 
 const head = styled.div`
   font-size: 1.1rem;
+  background: white;
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+  box-shadow: ${(props) => props.theme.boxShadow};
   & > section {
     display: flex;
     align-items: center;
@@ -42,7 +41,10 @@ const button = styled.button`
   }
 `
 
-const post = styled.div``
+const post = styled.div`
+  > * {
+  }
+`
 
 NewsFeed.Head = head
 NewsFeed.Post = post
