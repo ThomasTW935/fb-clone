@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useAuth } from '../../auth/AuthContext'
 import useCreatePost from '../../hooks/useCreatePost'
 import Con from './Modal.style'
@@ -27,12 +27,17 @@ export default function Modal({ open, setOpen }: IProps) {
       content: e.target.value,
     })
   }
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+    handleSubmitPost(e)
+    closeModal()
+  }
 
   return (
     <>
       {open && (
         <Con>
-          <Con.Form onSubmit={handleSubmitPost}>
+          <Con.Form onSubmit={handleSubmit}>
             <Con.Head>
               <p>Create Post</p>
               <button onClick={closeModal}>&times;</button>
