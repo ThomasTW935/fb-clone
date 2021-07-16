@@ -37,7 +37,7 @@ export default function NavBar() {
           <Nav.PrimaryTab
             key={index}
             to={tab.name !== 'home' ? `/${tab.name}` : '/'}
-            isactive={primaryTab === tab.name}
+            isactive={primaryTab === tab.name ? 1 : 0}
             onClick={() => {
               setPrimaryTab(tab.name)
             }}
@@ -58,7 +58,7 @@ export default function NavBar() {
         {SECONDARY_TABS.map((tab, index) => (
           <Nav.SecondaryTab
             key={index}
-            isactive={secondaryTab === tab.name}
+            isactive={secondaryTab === tab.name ? 1 : 0}
             onClick={() => {
               setSecondaryTab(tab.name)
             }}
