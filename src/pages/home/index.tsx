@@ -20,6 +20,7 @@ import Post from '../../components/Post'
 import { useEffect, useState } from 'react'
 import useFetchPost from '../../hooks/useFetchPost'
 import { IPost } from '../../interfaces'
+import { usePostContext } from '../../context/PostContext'
 
 const SIDENAV_ITEMS = [
   {
@@ -52,16 +53,14 @@ const SIDENAV_ITEMS = [
 export default function Home() {
   const { currentUser } = useAuth()
   const [openModal, setOpenModal] = useState(false)
-  const [posts, setPosts] = useState([])
+  const { postState } = usePostContext()
   const { fetchPosts } = useFetchPost()
   useEffect(() => {
     async function loadPosts() {
-      const res = await fetchPosts()
-      setPosts(res)
+      await fetchPosts()
     }
     loadPosts()
-    console.log(posts)
-  }, [])
+  }, [fetchPosts])
   return (
     <Main>
       {/* Left */}
@@ -94,7 +93,7 @@ export default function Home() {
           <section></section>
         </Main.NewsFeed.Head>
         <Main.NewsFeed.Post>
-          {posts.map((post: IPost) => (
+          {postState.posts.map((post: IPost) => (
             <Post key={post._id} post={post} />
           ))}
         </Main.NewsFeed.Post>

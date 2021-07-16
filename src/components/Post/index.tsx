@@ -8,7 +8,6 @@ import {
   faGlobeAsia,
   faLock,
 } from '@fortawesome/free-solid-svg-icons'
-import moment, { MomentInput } from 'moment'
 import { dateFormatter } from '../../helper/dateFormatter'
 
 interface IProps {
