@@ -4,8 +4,8 @@ const dateFormatter = (date: MomentInput) => {
   const dateNow = moment()
   moment.updateLocale('en', {
     relativeTime: {
-      s: '%ds',
-      ss: '%ds',
+      s: '1m',
+      ss: '1m',
       m: '%dm',
       mm: '%dm',
       h: '%dh',
