@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react'
 import useFetchPost from '../../hooks/useFetchPost'
 import { IPost } from '../../interfaces'
 import { usePostContext } from '../../context/PostContext'
+import Posts from '../../components/Post'
 
 const SIDENAV_ITEMS = [
   {
@@ -93,9 +94,7 @@ export default function Home() {
           <section></section>
         </Main.NewsFeed.Head>
         <Main.NewsFeed.Post>
-          {postState.posts.map((post: IPost) => (
-            <Post key={post._id} post={post} />
-          ))}
+          <Posts posts={postState.posts} />
         </Main.NewsFeed.Post>
       </Main.NewsFeed>
 
