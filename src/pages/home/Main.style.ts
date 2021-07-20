@@ -3,7 +3,7 @@ import styled, { StyledComponentBase } from 'styled-components'
 import { MainSideNav } from '../../core-ui/SideNav'
 import ImgCon from '../../core-ui/image/Profile-Rounded'
 import NewsFeed from './NewsFeed.style'
-import List from '../../core-ui/List.style'
+import baseListStyle from '../../core-ui/List.style'
 import baseMainStyle from '../../core-ui/Main'
 
 interface IMain extends StyledComponentBase<any, {}> {
@@ -27,6 +27,7 @@ const ContactHead = styled.div`
     gap: 0.5rem;
   }
 `
+const List = styled(baseListStyle)``
 
 Main.SideNav = MainSideNav
 Main.List = List
