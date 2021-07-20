@@ -14,7 +14,7 @@ export const defaultTheme: DefaultTheme = {
   palette: {
     common: {
       black: '#222831',
-      white: '#fff',
+      white: '#ffffff',
       grey: {
         lighter: `hsl(${hue}, ${sat}%, 90%)`,
         light: `hsl(${hue}, ${sat}%, 75%)`,
