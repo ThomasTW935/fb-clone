@@ -11,37 +11,41 @@ import {
   PostReducer,
   initialPostState,
 } from './context/PostContext'
+import { UIContext, UIReducer, initialUIState } from './context/UIContext'
 
 export default function App() {
   const { currentUser } = useAuth()
   const [isLogin, setIsLogin] = useState(true)
   const [postState, postDispatch] = useReducer(PostReducer, initialPostState)
+  const [uiState, uiDispatch] = useReducer(UIReducer, initialUIState)
   return (
     <>
-      <PostContext.Provider value={{ postState, postDispatch }}>
-        <Router>
-          {currentUser && (
-            <>
-              <NavBar />
-              <Switch>
-                <Route component={Home} exact path='/' />
-                <Route component={Watch} path='/watch' />
-                <Route component={Marketplace} path='/marketplace' />
-                <Route component={Group} path='/group' />
-              </Switch>
-            </>
-          )}
-          {!currentUser && (
-            <div className='authentication'>
-              {isLogin ? (
-                <Login setIsLogin={setIsLogin} />
-              ) : (
-                <Signup setIsLogin={setIsLogin} />
-              )}
-            </div>
-          )}
-        </Router>
-      </PostContext.Provider>
+      <UIContext.Provider value={{ uiState, uiDispatch }}>
+        <PostContext.Provider value={{ postState, postDispatch }}>
+          <Router>
+            {currentUser && (
+              <>
+                <NavBar />
+                <Switch>
+                  <Route component={Home} exact path='/' />
+                  <Route component={Watch} path='/watch' />
+                  <Route component={Marketplace} path='/marketplace' />
+                  <Route component={Group} path='/group' />
+                </Switch>
+              </>
+            )}
+            {!currentUser && (
+              <div className='authentication'>
+                {isLogin ? (
+                  <Login setIsLogin={setIsLogin} />
+                ) : (
+                  <Signup setIsLogin={setIsLogin} />
+                )}
+              </div>
+            )}
+          </Router>
+        </PostContext.Provider>
+      </UIContext.Provider>
     </>
   )
 }
