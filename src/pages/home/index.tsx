@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
   faUserFriends,
   faFlag,
@@ -16,12 +17,10 @@ import { SIZE } from '../../helper/enum'
 import { CONTACTS } from '../../data'
 import Main from './Main.style'
 import Modal from '../../components/Modal'
-import Post from '../../components/Post'
-import { useEffect, useState } from 'react'
 import useFetchPost from '../../hooks/useFetchPost'
-import { IPost } from '../../interfaces'
 import { usePostContext } from '../../context/PostContext'
 import Posts from '../../components/Post'
+import { UI_ACTIONS, useUIContext } from '../../context/UIContext'
 
 const SIDENAV_ITEMS = [
   {
@@ -53,7 +52,7 @@ const SIDENAV_ITEMS = [
 
 export default function Home() {
   const { currentUser } = useAuth()
-  const [openModal, setOpenModal] = useState(false)
+  const { uiDispatch } = useUIContext()
   const { postState } = usePostContext()
   const { fetchPosts } = useFetchPost()
   useEffect(() => {
@@ -61,7 +60,11 @@ export default function Home() {
       await fetchPosts()
     }
     loadPosts()
-  }, [fetchPosts])
+  }, [])
+  console.log('hello')
+  function handlePostModal(value: boolean) {
+    uiDispatch({ type: UI_ACTIONS.SET_POST_MODAL, payload: value })
+  }
   return (
     <Main>
       {/* Left */}
@@ -87,7 +90,7 @@ export default function Home() {
             <Main.ImgCon>
               <Main.ImgCon.Img src={testImg} alt='profile' />
             </Main.ImgCon>
-            <Main.NewsFeed.Button onClick={() => setOpenModal(true)}>
+            <Main.NewsFeed.Button onClick={() => handlePostModal(true)}>
               What's on your mind, {currentUser.name}?
             </Main.NewsFeed.Button>
           </section>
@@ -119,7 +122,7 @@ export default function Home() {
         </Main.List>
       </Main.SideNav>
 
-      <Modal open={openModal} setOpen={setOpenModal} />
+      <Modal />
     </Main>
   )
 }
