@@ -19,15 +19,14 @@ export default function Post({ post }: IProps) {
   const { user, createdAt } = post
   const formattedDate = dateFormatter(createdAt)
   const icon = post.privacy === 'Public' ? faGlobeAsia : faLock
-  const [postActions, setPostActions] = useState(false)
+  const [openActions, setOpenActions] = useState(false)
   const actionsRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     function handleDropdown(e: any) {
       const element = e.target as HTMLElement
-      console.log(element)
       if (actionsRef.current && !actionsRef.current.contains(element)) {
-        setPostActions(false)
+        setOpenActions(false)
       }
     }
     document.addEventListener('mousedown', handleDropdown)
@@ -35,6 +34,7 @@ export default function Post({ post }: IProps) {
       document.removeEventListener('mousedown', handleDropdown)
     }
   }, [actionsRef])
+
   return (
     <Con>
       <Con.Head>
@@ -50,10 +50,12 @@ export default function Post({ post }: IProps) {
           </div>
         </section>
         <Con.Actions ref={actionsRef}>
-          <button onClick={() => setPostActions((value) => !value)}>
+          <button onClick={() => setOpenActions(true)}>
             <FontAwesomeIcon icon={faEllipsisH} />
           </button>
-          {postActions && <PostActions />}
+          {openActions && (
+            <PostActions postId={post._id} setOpenActions={setOpenActions} />
+          )}
         </Con.Actions>
       </Con.Head>
       <Con.Body>{post.content}</Con.Body>
