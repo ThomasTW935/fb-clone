@@ -26,12 +26,12 @@ const head = styled.section`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-
-  div {
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
+  & > section {
+    width: 100%;
+    div {
+      font-size: 0.7rem;
+      gap: 0.3rem;
+    }
   }
 `
 const actions = styled.section`
