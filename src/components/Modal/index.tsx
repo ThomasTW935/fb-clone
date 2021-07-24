@@ -1,16 +1,14 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useAuth } from '../../auth/AuthContext'
+import { usePostContext, POST_ACTIONS } from '../../context/PostContext'
+import { useUIContext, UI_ACTIONS } from '../../context/UIContext'
 import useCreatePost from '../../hooks/useCreatePost'
 import Con from './Modal.style'
 
-interface IProps {
-  open: boolean
-  setOpen: (arg0: boolean) => void
-}
-
-export default function Modal({ open, setOpen }: IProps) {
+export default function Modal() {
   const { currentUser } = useAuth()
-
+  const { postState, postDispatch } = usePostContext()
+  const { uiState, uiDispatch } = useUIContext()
   const [postData, setPostData] = useState({
     privacy: 'Public',
     content: '',
@@ -18,9 +16,6 @@ export default function Modal({ open, setOpen }: IProps) {
   })
   const { loading, handleSubmitPost } = useCreatePost(postData)
 
-  function closeModal() {
-    setOpen(false)
-  }
   function handleContentChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setPostData({
       ...postData,
@@ -30,23 +25,39 @@ export default function Modal({ open, setOpen }: IProps) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
     handleSubmitPost(e)
-    closeModal()
   }
-
+  function closeModal() {
+    uiDispatch({ type: UI_ACTIONS.SET_POST_MODAL, payload: false })
+    postDispatch({ type: POST_ACTIONS.SET_SELECTED_POST, payload: '' })
+  }
+  useEffect(() => {
+    if (postState.selectedPost !== '') {
+      const post = postState.posts.filter(
+        (post) => post._id === postState.selectedPost
+      )[0]
+      setPostData({
+        privacy: post.privacy,
+        content: post.content,
+        userId: post.user._id,
+      })
+    }
+  }, [postState.selectedPost])
+  const title = postState.selectedPost === '' ? 'Create Post' : 'Edit Post'
   return (
     <>
-      {open && (
+      {uiState.postModal && (
         <Con>
           <Con.Form onSubmit={handleSubmit}>
             <Con.Head>
-              <p>Create Post</p>
+              <p>{title}</p>
               <button onClick={closeModal}>&times;</button>
             </Con.Head>
             <Con.Body>
               <textarea
                 onChange={handleContentChange}
                 placeholder="What's on your mind?"
-              ></textarea>
+                value={postData.content}
+              />
               <button disabled={loading}>Post</button>
             </Con.Body>
           </Con.Form>
