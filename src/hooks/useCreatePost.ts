@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { FormEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { usePostContext, ACTIONS } from '../context/PostContext'
+import { usePostContext, POST_ACTIONS } from '../context/PostContext'
 
 const url = process.env.REACT_APP_ENDPOINT || '/api/posts'
 
@@ -21,7 +21,7 @@ const useCreatePost = (postData: IProps) => {
     setLoading(true)
     try {
       const response = await axios.post(url, postData)
-      postDispatch({ type: ACTIONS.ADD_POST, payload: response.data.post })
+      postDispatch({ type: POST_ACTIONS.ADD_POST, payload: response.data.post })
       setLoading(false)
       history.push('/')
     } catch (err) {

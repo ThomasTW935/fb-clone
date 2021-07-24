@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { usePostContext, ACTIONS } from '../context/PostContext'
+import { usePostContext, POST_ACTIONS } from '../context/PostContext'
 
 const useFetchPost = () => {
   const [loading, setLoading] = useState(false)
@@ -10,7 +10,7 @@ const useFetchPost = () => {
     try {
       const { data } = await axios.get('/api/posts')
       if (data) {
-        postDispatch({ type: ACTIONS.SET_POSTS, payload: data.posts })
+        postDispatch({ type: POST_ACTIONS.SET_POSTS, payload: data.posts })
       }
       setLoading(false)
     } catch (err) {
