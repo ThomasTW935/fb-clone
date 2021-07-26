@@ -30,6 +30,8 @@ const head = styled.section`
     width: 100%;
     div {
       font-size: 0.7rem;
+      display: flex;
+      align-items: center;
       gap: 0.3rem;
     }
   }
