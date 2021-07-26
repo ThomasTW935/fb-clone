@@ -61,7 +61,6 @@ export default function Home() {
     }
     loadPosts()
   }, [])
-  console.log('hello')
   function handlePostModal(value: boolean) {
     uiDispatch({ type: UI_ACTIONS.SET_POST_MODAL, payload: value })
   }

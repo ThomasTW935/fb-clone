@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useAuth } from '../../auth/AuthContext'
 import { usePostContext, POST_ACTIONS } from '../../context/PostContext'
 import { useUIContext, UI_ACTIONS } from '../../context/UIContext'
-import useCreatePost from '../../hooks/useCreatePost'
+import usePost from '../../hooks/usePost'
 import Con from './Modal.style'
 
 export default function Modal() {
@@ -14,7 +14,12 @@ export default function Modal() {
     content: '',
     userId: currentUser._id,
   })
-  const { loading, handleSubmitPost } = useCreatePost(postData)
+  const { loading, handleCreatePost, handleEditPost } = usePost()
+
+  function closeModal() {
+    uiDispatch({ type: UI_ACTIONS.SET_POST_MODAL, payload: false })
+    postDispatch({ type: POST_ACTIONS.SET_SELECTED_POST, payload: '' })
+  }
 
   function handleContentChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setPostData({
@@ -24,12 +29,15 @@ export default function Modal() {
   }
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    handleSubmitPost(e)
+    if (postState.selectedPost !== '') {
+      handleEditPost(postState.selectedPost, postData)
+      closeModal()
+      return
+    }
+    handleCreatePost(postData)
+    closeModal()
   }
-  function closeModal() {
-    uiDispatch({ type: UI_ACTIONS.SET_POST_MODAL, payload: false })
-    postDispatch({ type: POST_ACTIONS.SET_SELECTED_POST, payload: '' })
-  }
+
   useEffect(() => {
     if (postState.selectedPost !== '') {
       const post = postState.posts.filter(
@@ -43,6 +51,7 @@ export default function Modal() {
     }
   }, [postState.selectedPost])
   const title = postState.selectedPost === '' ? 'Create Post' : 'Edit Post'
+  const button = postState.selectedPost === '' ? 'Post' : 'Save'
   return (
     <>
       {uiState.postModal && (
@@ -58,7 +67,7 @@ export default function Modal() {
                 placeholder="What's on your mind?"
                 value={postData.content}
               />
-              <button disabled={loading}>Post</button>
+              <button disabled={loading}>{button}</button>
             </Con.Body>
           </Con.Form>
         </Con>

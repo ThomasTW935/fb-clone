@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 import { usePostContext, POST_ACTIONS } from '../../context/PostContext'
 import { useUIContext, UI_ACTIONS } from '../../context/UIContext'
+import usePost from '../../hooks/usePost'
 interface IProps {
   postId: string
   setOpenActions: (arg: boolean) => void
@@ -12,10 +13,15 @@ interface IProps {
 function PostActions({ postId, setOpenActions }: IProps) {
   const { postDispatch } = usePostContext()
   const { uiDispatch } = useUIContext()
+  const { handleDeletePost } = usePost()
 
   function handleEdit() {
     postDispatch({ type: POST_ACTIONS.SET_SELECTED_POST, payload: postId })
     uiDispatch({ type: UI_ACTIONS.SET_POST_MODAL, payload: true })
+    setOpenActions(false)
+  }
+  function handleDelete() {
+    handleDeletePost(postId)
     setOpenActions(false)
   }
 
@@ -25,7 +31,7 @@ function PostActions({ postId, setOpenActions }: IProps) {
         <FontAwesomeIcon icon={faEdit} />
         <span>Edit post</span>
       </Con.List.Item>
-      <Con.List.Item>
+      <Con.List.Item onClick={handleDelete}>
         <FontAwesomeIcon icon={faTrashAlt} />
         <span>Move to trash</span>
       </Con.List.Item>

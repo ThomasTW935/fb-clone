@@ -1,4 +1,5 @@
 import { useContext, createContext, Dispatch } from 'react'
+import Posts from '../components/Post'
 import { IPost } from '../interfaces'
 
 export enum POST_ACTIONS {
@@ -6,6 +7,7 @@ export enum POST_ACTIONS {
   ADD_POST = 'add-post',
   UPDATE_POST = 'update-post',
   SET_SELECTED_POST = 'set-selected-post',
+  DELETE_POST = 'delete-post',
 }
 
 type Reducer<TState, TAction> = (state: TState, action: TAction) => TState
@@ -18,8 +20,9 @@ type TState = {
 type TAction =
   | { type: POST_ACTIONS.SET_POSTS; payload: IPost[] }
   | { type: POST_ACTIONS.ADD_POST; payload: IPost }
-  | { type: POST_ACTIONS.UPDATE_POST; payload: string }
+  | { type: POST_ACTIONS.UPDATE_POST; payload: IPost }
   | { type: POST_ACTIONS.SET_SELECTED_POST; payload: string }
+  | { type: POST_ACTIONS.DELETE_POST; payload: string }
 
 export const initialPostState: TState = {
   posts: [],
@@ -52,6 +55,20 @@ export const PostReducer: Reducer<TState, TAction> = (state, action) => {
       return { ...state, posts: [action.payload, ...state.posts] }
     case POST_ACTIONS.SET_SELECTED_POST:
       return { ...state, selectedPost: action.payload }
+    case POST_ACTIONS.UPDATE_POST:
+      console.log(action.payload)
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id !== action.payload._id) return post
+          return action.payload
+        }),
+      }
+    case POST_ACTIONS.DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload),
+      }
     default:
       return state
   }
