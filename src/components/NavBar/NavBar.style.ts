@@ -11,7 +11,6 @@ interface INavBar extends StyledComponentBase<any, {}> {
   List?: any
   ImgCon?: any
   SecondaryTab?: any
-  Profile?: any
   PrimaryTab?: any
 }
 
@@ -44,29 +43,6 @@ const RightSide = styled.section`
   display: flex;
   justify-content: end;
 `
-const Profile = styled.div`
-  position: relative;
-  display: none;
-  align-items: center;
-  margin: 0 0.5rem;
-  gap: 5px;
-  border-radius: 1.5rem;
-  padding: 0.45rem 1rem;
-  padding-left: 2.3rem;
-  background: ${(props) => props.theme.palette.common.grey.lighter};
-  cursor: pointer;
-  &:hover {
-    background: ${(props) => props.theme.palette.common.grey.light};
-  }
-  @media only screen and (min-width: ${(props) => props.theme.device.md}) {
-    display: flex;
-  }
-
-  & > div {
-    position: absolute;
-    left: 0;
-  }
-`
 
 Nav.Left = LeftSide
 Nav.Middle = MiddleSide
@@ -75,6 +51,5 @@ Nav.List = List
 Nav.ImgCon = ImgCon
 Nav.SecondaryTab = SecondaryTab
 Nav.PrimaryTab = PrimaryTab
-Nav.Profile = Profile
 
 export default Nav
