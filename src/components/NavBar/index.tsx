@@ -6,6 +6,7 @@ import testImg from '../../assets/images/testImg.jpg'
 import { PRIMARY_TABS, SECONDARY_TABS } from '../../data'
 import Nav from './NavBar.style'
 import SearchBar from '../SearchBar'
+import UserProfile from '../UserProfile'
 
 export default function NavBar() {
   const [primaryTab, setPrimaryTab] = useState(PRIMARY_TABS[0].name)
@@ -49,12 +50,7 @@ export default function NavBar() {
 
       {/* Right */}
       <Nav.Right>
-        <Nav.Profile>
-          <Nav.ImgCon className='profile__imageCon'>
-            <Nav.ImgCon.Img src={testImg} alt='Profile' />
-          </Nav.ImgCon>
-          <span>{currentUser.name}</span>
-        </Nav.Profile>
+        <UserProfile />
         {SECONDARY_TABS.map((tab, index) => (
           <Nav.SecondaryTab
             key={index}
