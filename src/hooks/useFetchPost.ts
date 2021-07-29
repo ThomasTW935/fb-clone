@@ -18,8 +18,21 @@ const useFetchPost = () => {
       setLoading(false)
     }
   }
+  async function fetchPostsByUser(userId: string) {
+    setLoading(true)
+    try {
+      const { data } = await axios.get(`/api/posts/${userId}`)
+      if (data) {
+        postDispatch({ type: POST_ACTIONS.SET_POSTS, payload: data.posts })
+      }
+      setLoading(false)
+    } catch (err) {
+      console.log({ error: err })
+      setLoading(false)
+    }
+  }
 
-  return { loading, fetchPosts }
+  return { loading, fetchPosts, fetchPostsByUser }
 }
 
 export default useFetchPost
