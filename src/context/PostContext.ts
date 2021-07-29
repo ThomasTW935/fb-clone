@@ -56,7 +56,6 @@ export const PostReducer: Reducer<TState, TAction> = (state, action) => {
     case POST_ACTIONS.SET_SELECTED_POST:
       return { ...state, selectedPost: action.payload }
     case POST_ACTIONS.UPDATE_POST:
-      console.log(action.payload)
       return {
         ...state,
         posts: state.posts.map((post) => {

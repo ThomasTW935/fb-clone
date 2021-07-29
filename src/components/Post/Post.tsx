@@ -21,7 +21,6 @@ export default function Post({ post }: IProps) {
   const icon = post.privacy === 'Public' ? faGlobeAsia : faLock
   const [openActions, setOpenActions] = useState(false)
   const actionsRef = useRef<HTMLElement>(null)
-
   useEffect(() => {
     function handleDropdown(e: any) {
       const element = e.target as HTMLElement
@@ -42,7 +41,7 @@ export default function Post({ post }: IProps) {
           <Con.ImgCon.Img src={testImg} alt='profile' size={19} />
         </Con.ImgCon>
         <section>
-          <h4>{user.name}</h4>
+          <h4>{`${user.first_name} ${user.last_name}`}</h4>
           <div>
             {formattedDate}
             <span>&#183;</span>
