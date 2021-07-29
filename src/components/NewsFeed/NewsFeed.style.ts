@@ -1,13 +1,14 @@
 import styled, { StyledComponentBase } from 'styled-components'
 import { baseButtonStyle } from '../../core-ui/Button'
+import ImgCon from '../../core-ui/image/Profile-Rounded'
 
-interface INewsFeed extends StyledComponentBase<any, {}> {
+interface ICon extends StyledComponentBase<any, {}> {
   Head?: any
-  Post?: any
   Button?: any
+  ImgCon?: any
 }
 
-const NewsFeed: INewsFeed = styled.section`
+const Con: ICon = styled.section`
   max-width: 90ch;
   width: 100%;
 `
@@ -40,14 +41,8 @@ const button = styled.button`
     background: ${(props) => props.theme.palette.common.grey.light};
   }
 `
+Con.Head = head
+Con.Button = button
+Con.ImgCon = ImgCon
 
-const post = styled.div`
-  > * {
-  }
-`
-
-NewsFeed.Head = head
-NewsFeed.Post = post
-NewsFeed.Button = button
-
-export default NewsFeed
+export default Con

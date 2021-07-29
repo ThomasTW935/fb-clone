@@ -10,17 +10,13 @@ import {
   faSearch,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useAuth } from '../../auth/AuthContext'
-import testImg from '../../assets/images/testImg.jpg'
-
 import { SIZE } from '../../helper/enum'
 import { CONTACTS } from '../../data'
 import Main from './Main.style'
 import Modal from '../../components/Modal'
 import useFetchPost from '../../hooks/useFetchPost'
 import { usePostContext } from '../../context/PostContext'
-import Posts from '../../components/Post'
-import { UI_ACTIONS, useUIContext } from '../../context/UIContext'
+import NewsFeed from '../../components/NewsFeed'
 
 const SIDENAV_ITEMS = [
   {
@@ -51,8 +47,6 @@ const SIDENAV_ITEMS = [
 ]
 
 export default function Home() {
-  const { currentUser } = useAuth()
-  const { uiDispatch } = useUIContext()
   const { postState } = usePostContext()
   const { fetchPosts } = useFetchPost()
   useEffect(() => {
@@ -61,9 +55,7 @@ export default function Home() {
     }
     loadPosts()
   }, [])
-  function handlePostModal(value: boolean) {
-    uiDispatch({ type: UI_ACTIONS.SET_POST_MODAL, payload: value })
-  }
+
   return (
     <Main>
       {/* Left */}
@@ -83,22 +75,7 @@ export default function Home() {
 
       {/* Middle */}
 
-      <Main.NewsFeed>
-        <Main.NewsFeed.Head>
-          <section>
-            <Main.ImgCon>
-              <Main.ImgCon.Img src={testImg} alt='profile' />
-            </Main.ImgCon>
-            <Main.NewsFeed.Button onClick={() => handlePostModal(true)}>
-              What's on your mind, {currentUser.name}?
-            </Main.NewsFeed.Button>
-          </section>
-          <section></section>
-        </Main.NewsFeed.Head>
-        <Main.NewsFeed.Post>
-          <Posts posts={postState.posts} />
-        </Main.NewsFeed.Post>
-      </Main.NewsFeed>
+      {postState.posts && <NewsFeed posts={postState.posts} />}
 
       {/* Right */}
       <Main.SideNav size={SIZE.md}>
