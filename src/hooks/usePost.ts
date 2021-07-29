@@ -14,7 +14,6 @@ interface IPost {
 const usePost = () => {
   const [loading, setLoading] = useState(false)
   const { postDispatch } = usePostContext()
-  const history = useHistory()
 
   const handleCreatePost = async (postData: IPost) => {
     setLoading(true)
@@ -22,7 +21,6 @@ const usePost = () => {
       const response = await axios.post(url, postData)
       postDispatch({ type: POST_ACTIONS.ADD_POST, payload: response.data.post })
       setLoading(false)
-      history.push('/')
     } catch (err) {
       setLoading(false)
       console.log({ error: err })
@@ -37,7 +35,6 @@ const usePost = () => {
         payload: response.data.post,
       })
       setLoading(false)
-      history.push('/')
     } catch (err) {
       setLoading(false)
       console.log({ error: err })
@@ -52,7 +49,6 @@ const usePost = () => {
         payload: id,
       })
       setLoading(false)
-      history.push('/')
     } catch (err) {
       setLoading(false)
       console.log({ error: err })
