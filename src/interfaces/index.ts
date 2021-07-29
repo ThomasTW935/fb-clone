@@ -1,7 +1,8 @@
 interface IUser {
   _id: string
   active: boolean
-  name: string
+  first_name: string
+  last_name: string
 }
 interface IPost {
   privacy: string

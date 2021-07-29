@@ -9,7 +9,8 @@ type Props = {
 export default function Signup({ setIsLogin }: Props) {
   const { signup } = useAuth()
 
-  const nameRef = useRef<HTMLInputElement>(null)
+  const firstNameRef = useRef<HTMLInputElement>(null)
+  const lastNameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const minimumRef = useRef<HTMLInputElement>(null)
@@ -25,13 +26,15 @@ export default function Signup({ setIsLogin }: Props) {
     try {
       setLoading(true)
       setError('')
-      const name = nameRef.current?.value
+      const firstName = firstNameRef.current?.value
+      const lastName = lastNameRef.current?.value
       const firebaseResponse = await signup(
         emailRef.current?.value,
         passwordRef.current?.value
       )
       const newUser = {
-        name: name,
+        firstName: firstName,
+        lastName: lastName,
         firebase_uid: firebaseResponse.user.uid,
       }
       await axios.post('/api/users', newUser)
@@ -83,22 +86,18 @@ export default function Signup({ setIsLogin }: Props) {
     if (classToAdd === 'error') return setLoading(true)
     setLoading(false)
   }
-  async function testAxios() {
-    try {
-      const response = await axios.get('/api/users')
-      console.log(response)
-    } catch (err) {
-      console.log(err)
-    }
-  }
   return (
     <div>
       <h2>Sign Up</h2>
       <div className='error'>{error}</div>
       <form onSubmit={handleSubmit}>
         <section>
-          <label>Name</label>
-          <input type='text' ref={nameRef} required />
+          <label>First Name</label>
+          <input type='text' ref={firstNameRef} required />
+        </section>
+        <section>
+          <label>Last Name</label>
+          <input type='text' ref={lastNameRef} required />
         </section>
         <section>
           <label>Email</label>
@@ -124,7 +123,6 @@ export default function Signup({ setIsLogin }: Props) {
             </span>
           </div>
         </section>
-        <button onClick={testAxios}>test</button>
         <button className='cta' disabled={loading} type='submit'>
           Sign Up
         </button>
