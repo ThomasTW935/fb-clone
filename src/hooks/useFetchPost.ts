@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { usePostContext, POST_ACTIONS } from '../context/PostContext'
+import { postsApi } from '../config/apiRoutes'
 
 const useFetchPost = () => {
   const [loading, setLoading] = useState(false)
@@ -8,7 +9,7 @@ const useFetchPost = () => {
   async function fetchPosts() {
     setLoading(true)
     try {
-      const { data } = await axios.get('/api/posts')
+      const { data } = await axios.get(postsApi)
       if (data) {
         postDispatch({ type: POST_ACTIONS.SET_POSTS, payload: data.posts })
       }
@@ -21,7 +22,7 @@ const useFetchPost = () => {
   async function fetchPostsByUser(userId: string) {
     setLoading(true)
     try {
-      const { data } = await axios.get(`/api/posts/${userId}`)
+      const { data } = await axios.get(postsApi + `/${userId}`)
       if (data) {
         postDispatch({ type: POST_ACTIONS.SET_POSTS, payload: data.posts })
       }

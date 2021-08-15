@@ -33,7 +33,6 @@ export default function Post({ post }: IProps) {
       document.removeEventListener('mousedown', handleDropdown)
     }
   }, [actionsRef])
-
   return (
     <Con>
       <Con.Head>

@@ -1,14 +1,11 @@
-import axios from 'axios'
-import { ChangeEvent, FormEvent, RefObject, useRef, useState } from 'react'
-import { useAuth } from '../../auth/AuthContext'
+import { ChangeEvent, FormEvent, RefObject, useRef } from 'react'
+import useUser from '../../hooks/useUser'
 
 type Props = {
   setIsLogin: (arg0: boolean) => void
 }
 
 export default function Signup({ setIsLogin }: Props) {
-  const { signup } = useAuth()
-
   const firstNameRef = useRef<HTMLInputElement>(null)
   const lastNameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
@@ -18,30 +15,17 @@ export default function Signup({ setIsLogin }: Props) {
   const bothLetNumRef = useRef<HTMLInputElement>(null)
   const specialCharRef = useRef<HTMLInputElement>(null)
 
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const { loading, setLoading, error, handleSignup } = useUser()
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    try {
-      setLoading(true)
-      setError('')
-      const firstName = firstNameRef.current?.value
-      const lastName = lastNameRef.current?.value
-      const firebaseResponse = await signup(
-        emailRef.current?.value,
-        passwordRef.current?.value
-      )
-      const newUser = {
-        firstName: firstName,
-        lastName: lastName,
-        firebase_uid: firebaseResponse.user.uid,
-      }
-      await axios.post('/api/users', newUser)
-    } catch {
-      setError('Failed to create an account')
+    const userData = {
+      first_name: firstNameRef.current?.value as string,
+      last_name: lastNameRef.current?.value as string,
+      email: emailRef.current?.value as string,
+      password: passwordRef.current?.value as string,
     }
-    setLoading(false)
+    handleSignup(userData)
   }
 
   function handlePasswordChange(e: ChangeEvent<HTMLInputElement>) {

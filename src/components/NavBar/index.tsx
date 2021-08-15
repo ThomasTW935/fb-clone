@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { useAuth } from '../../auth/AuthContext'
-import testImg from '../../assets/images/testImg.jpg'
 import { PRIMARY_TABS, SECONDARY_TABS } from '../../data'
 import Nav from './NavBar.style'
 import SearchBar from '../SearchBar'
@@ -14,8 +13,7 @@ export default function NavBar() {
   const [searchOnFocus, setSearchInFocus] = useState(false)
   // const searchRef = useRef<HTMLInputElement>(null)
 
-  const { logout, currentUser } = useAuth()
-
+  const { logout } = useAuth()
   return (
     <Nav className='nav'>
       {/* Left */}
@@ -63,7 +61,7 @@ export default function NavBar() {
           </Nav.SecondaryTab>
         ))}
 
-        <button onClick={logout}>Logout</button>
+        {/* <button onClick={logout}>Logout</button> */}
       </Nav.Right>
     </Nav>
   )

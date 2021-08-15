@@ -45,6 +45,7 @@ const PrimaryTab = styled(Link)<IProps>`
 
 const SecondaryTab = styled.button<IProps>`
   font-size: 0.85rem;
+  min-width: 2.5em;
   ${baseButtonStyle}
   color: ${(props) =>
     props.isactive

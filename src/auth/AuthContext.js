@@ -1,66 +1,78 @@
-import axios from "axios";
-import { useContext, useState, useEffect, createContext } from "react";
-import { auth } from "../firebase";
+import axios from 'axios'
+import { useContext, useState, useEffect, createContext } from 'react'
+import { auth } from '../firebase'
+import { usersApi } from '../config/apiRoutes'
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
 export function useAuth() {
-  return useContext(AuthContext);
+  return useContext(AuthContext)
 }
 
 export function AuthProvider({ children }) {
-  const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true)
+  const [currentUser, setCurrentUser] = useState(null)
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return auth.createUserWithEmailAndPassword(email, password)
   }
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return auth.signInWithEmailAndPassword(email, password)
   }
   function logout() {
-    return auth.signOut();
+    return auth.signOut()
   }
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+    return auth.sendPasswordResetEmail(email)
   }
   function updateEmail(email) {
-    return currentUser.updateEmail(email);
+    return currentUser.updateEmail(email)
   }
   function updatePassword(password) {
-    return currentUser?.updatePassword(password);
+    return currentUser?.updatePassword(password)
   }
-  function updateProfile(name, photoUrl = null){
-    return currentUser.updateProfile({displayName: name})
+  function setUser(data) {
+    setCurrentUser((prevState) => {
+      let newState = {
+        ...prevState,
+        _id: data._id,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        firebase_uid: data.firebase_uid,
+      }
+      return newState
+    })
   }
-
   useEffect(() => {
     const unsubcribe = auth.onAuthStateChanged( async (user) => {
-      if(user){
-        const response = await axios.get(`/api/users/${user.uid}`)
-        
-        user["first_name"] = response.data.first_name
-        user["last_name"] = response.data.last_name
-        user["_id"] = response.data._id
-      }
-      setCurrentUser(user);
-      setLoading(false);
-    });
-    return unsubcribe;
-  }, []);
-
+      setCurrentUser(user)
+      setLoading(false)
+    })
+    return unsubcribe
+  }, [])
+  useEffect(()=>{
+    async function getUser(){
+      console.log(currentUser)
+      const response = await axios.get(usersApi + `/${currentUser.uid}`)
+      setUser(response.data)
+    }
+    if(currentUser !=null) {
+      getUser()
+      return
+    }
+  },[currentUser?.uid])
   const value = {
     currentUser,
+    setCurrentUser,
     signup,
     login,
     logout,
     resetPassword,
     updateEmail,
     updatePassword,
-    updateProfile
-  };
+  }
   return (
     <AuthContext.Provider value={value}>
-    {!loading && children}
+      {!loading && children}
     </AuthContext.Provider>
-  );
+  )
 }

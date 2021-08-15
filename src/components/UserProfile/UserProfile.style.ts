@@ -13,7 +13,6 @@ const Profile: IProfile = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  margin: 0 0.5rem;
   gap: 5px;
   border-radius: 1.5rem;
   padding: 0.45rem 1rem;
@@ -22,7 +21,7 @@ const Profile: IProfile = styled(Link)`
   &:hover {
     background: ${(props) => props.theme.palette.common.grey.light};
   }
-  @media only screen and (min-width: ${(props) => props.theme.device.md}) {
+  @media only screen and (min-width: ${(props) => props.theme.device.lg}) {
     display: flex;
   }
   & > div {

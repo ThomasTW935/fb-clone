@@ -28,6 +28,7 @@ const Nav: INavBar = styled.nav`
 const LeftSide = styled.section`
   ${baseSideNav}
   display: flex;
+  position: relative;
 `
 const MiddleSide = styled.section`
   display: none;

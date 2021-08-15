@@ -6,7 +6,7 @@ import Con from './SearchBar,style'
 export default function SearchBar() {
   const [onFocus, setOnFocus] = useState(false)
   return (
-    <Con>
+    <Con isFocus={onFocus}>
       {onFocus && (
         <FontAwesomeIcon
           size='lg'
@@ -19,7 +19,6 @@ export default function SearchBar() {
           <FontAwesomeIcon icon={faSearch} />
         </Con.Icon>
         <Con.Input
-          // ref={searchRef}
           type='search'
           placeholder='Search Facebook...'
           onFocus={() => setOnFocus(true)}
