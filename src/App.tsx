@@ -35,7 +35,7 @@ export default function App() {
                 </Switch>
               </>
             )}
-            {!currentUser && (
+            {(!currentUser || currentUser === undefined) && (
               <div className='authentication'>
                 {isLogin ? (
                   <Login setIsLogin={setIsLogin} />
