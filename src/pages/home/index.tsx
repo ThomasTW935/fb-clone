@@ -8,6 +8,7 @@ import {
   faUsers,
   faEllipsisH,
   faSearch,
+  faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { SIZE } from '../../helper/enum'
@@ -17,6 +18,7 @@ import Modal from '../../components/Modal'
 import useFetchPost from '../../hooks/useFetchPost'
 import { usePostContext } from '../../context/PostContext'
 import NewsFeed from '../../components/NewsFeed'
+import { useAuth } from '../../auth/AuthContext'
 
 const SIDENAV_ITEMS = [
   {
@@ -39,6 +41,10 @@ const SIDENAV_ITEMS = [
     name: 'watch',
     icon: faPlay,
   },
+  {
+    name: 'logout',
+    icon: faSignOutAlt,
+  },
 
   {
     name: 'See More',
@@ -49,13 +55,16 @@ const SIDENAV_ITEMS = [
 export default function Home() {
   const { postState } = usePostContext()
   const { fetchPosts } = useFetchPost()
+  const { logout } = useAuth()
   useEffect(() => {
     async function loadPosts() {
       await fetchPosts()
     }
     loadPosts()
   }, [])
-
+  async function handleSideNav(name: string) {
+    if (name === 'logout') await logout
+  }
   return (
     <Main>
       {/* Left */}
@@ -63,7 +72,10 @@ export default function Home() {
       <Main.SideNav size={SIZE.lg}>
         <Main.List>
           {SIDENAV_ITEMS.map((item, index) => (
-            <Main.List.Item key={index}>
+            <Main.List.Item
+              key={index}
+              onClick={() => handleSideNav(item.name)}
+            >
               <span>
                 <FontAwesomeIcon size='lg' icon={item.icon} />
               </span>
