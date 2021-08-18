@@ -63,7 +63,7 @@ export default function Home() {
     loadPosts()
   }, [])
   async function handleSideNav(name: string) {
-    if (name === 'logout') await logout
+    if (name === 'logout') await logout()
   }
   return (
     <Main>

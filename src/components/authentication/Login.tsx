@@ -1,6 +1,7 @@
 import React, { FormEvent, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useUser from '../../hooks/useUser'
+import Con from './Authentication.style'
 
 type Props = {
   setIsLogin: (arg0: boolean) => void
@@ -21,34 +22,30 @@ export default function Login({ setIsLogin }: Props) {
   }
 
   return (
-    <div>
+    <Con>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <Con.Form onSubmit={handleSubmit}>
         <span>{error}</span>
-        <section>
+        <Con.Section>
           <label>Email</label>
           <input type='text' ref={emailRef} required />
-        </section>
-        <section>
+        </Con.Section>
+        <Con.Section>
           <label>Password</label>
           <input type='password' ref={passwordRef} required />
-        </section>
-        <button className='cta' disabled={loading} type='submit'>
+        </Con.Section>
+        <Con.CTA disabled={loading} type='submit'>
           Login
-        </button>
-      </form>
+        </Con.CTA>
+      </Con.Form>
       <div>
         Create an account here{' '}
-        <button className='link' onClick={() => setIsLogin(false)}>
-          Sign Up
-        </button>
+        <Con.Button onClick={() => setIsLogin(false)}>Sign Up</Con.Button>
       </div>
       <div>
         Forgot Password?{' '}
-        <Link className='link' to='/forgot-password'>
-          Reset Password
-        </Link>
+        <Con.Link to='/forgot-password'>Reset Password</Con.Link>
       </div>
-    </div>
+    </Con>
   )
 }

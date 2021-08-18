@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, RefObject, useRef } from 'react'
 import useUser from '../../hooks/useUser'
+import Con from './Authentication.style'
 
 type Props = {
   setIsLogin: (arg0: boolean) => void
@@ -71,23 +72,23 @@ export default function Signup({ setIsLogin }: Props) {
     setLoading(false)
   }
   return (
-    <div>
+    <Con>
       <h2>Sign Up</h2>
-      <div className='error'>{error}</div>
-      <form onSubmit={handleSubmit}>
-        <section>
+      <div>{error}</div>
+      <Con.Form onSubmit={handleSubmit}>
+        <Con.Section>
           <label>First Name</label>
           <input type='text' ref={firstNameRef} required />
-        </section>
-        <section>
+        </Con.Section>
+        <Con.Section>
           <label>Last Name</label>
           <input type='text' ref={lastNameRef} required />
-        </section>
-        <section>
+        </Con.Section>
+        <Con.Section>
           <label>Email</label>
           <input type='email' ref={emailRef} required />
-        </section>
-        <section>
+        </Con.Section>
+        <Con.Section>
           <label>Password</label>
           <input
             onChange={handlePasswordChange}
@@ -95,7 +96,7 @@ export default function Signup({ setIsLogin }: Props) {
             ref={passwordRef}
             required
           />
-          <div className='guide'>
+          <Con.Guide>
             <span ref={minimumRef}>*Minimum of 8 Characters</span>
             <span ref={bothUpLowRef}>
               *A mixture of both uppercase and lowercase letters{' '}
@@ -105,18 +106,16 @@ export default function Signup({ setIsLogin }: Props) {
               *Inclusion of at least one special character, e.g., ! @ # ? Note:
               do not use &#60; or &#62;
             </span>
-          </div>
-        </section>
-        <button className='cta' disabled={loading} type='submit'>
+          </Con.Guide>
+        </Con.Section>
+        <Con.CTA disabled={loading} type='submit'>
           Sign Up
-        </button>
-      </form>
+        </Con.CTA>
+      </Con.Form>
       <div>
         Already have an Account?{' '}
-        <button className='link' onClick={() => setIsLogin(true)}>
-          Sign In
-        </button>
+        <Con.Button onClick={() => setIsLogin(true)}>Sign In</Con.Button>
       </div>
-    </div>
+    </Con>
   )
 }

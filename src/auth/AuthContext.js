@@ -51,7 +51,6 @@ export function AuthProvider({ children }) {
   }, [])
   useEffect(()=>{
     async function getUser(){
-      console.log(currentUser)
       const response = await axios.get(usersApi + `/${currentUser.uid}`)
       setUser(response.data)
     }

@@ -81,6 +81,14 @@ const reset = css`
 `
 const GlobalStyle = createGlobalStyle`
   ${reset}
+  body {
+  background: hsl(210, 5%, 90%);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
   main,nav{
     padding: .5rem;
   }

@@ -1,11 +1,10 @@
 import React, { useState, useReducer } from 'react'
 import NavBar from './components/NavBar'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import './styles/main.css'
 import { Home, Group, Watch, Marketplace, Profile } from './pages'
 import { useAuth } from './auth/AuthContext'
-import Login from '../src/components/authentication/Login'
-import Signup from '../src/components/authentication/Signup'
+import Login from './components/Authentication/Login'
+import Signup from './components/Authentication/Signup'
 import {
   PostContext,
   PostReducer,
@@ -36,7 +35,7 @@ export default function App() {
               </>
             )}
             {(!currentUser || currentUser === undefined) && (
-              <div className='authentication'>
+              <div>
                 {isLogin ? (
                   <Login setIsLogin={setIsLogin} />
                 ) : (
