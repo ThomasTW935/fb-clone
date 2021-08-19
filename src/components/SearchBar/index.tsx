@@ -2,20 +2,19 @@ import React, { useState } from 'react'
 import { faArrowLeft, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Con from './SearchBar,style'
+import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 
 export default function SearchBar() {
   const [onFocus, setOnFocus] = useState(false)
   return (
     <Con isFocus={onFocus}>
       {onFocus && (
-        <FontAwesomeIcon
-          size='lg'
-          className='search__back'
-          icon={faArrowLeft}
-        />
+        <Con.Icon onClick={() => setOnFocus(false)}>
+          <FontAwesomeIcon size='lg' icon={faArrowLeft} />
+        </Con.Icon>
       )}
       <Con.Bar>
-        <Con.Icon onClick={() => setOnFocus(true)}>
+        <Con.Icon onClick={() => setOnFocus(true)} isFocus={onFocus}>
           <FontAwesomeIcon icon={faSearch} />
         </Con.Icon>
         <Con.Input
@@ -23,6 +22,7 @@ export default function SearchBar() {
           placeholder='Search Facebook...'
           onFocus={() => setOnFocus(true)}
           onBlur={() => setOnFocus(false)}
+          isFocus={onFocus}
         />
       </Con.Bar>
     </Con>

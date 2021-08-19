@@ -1,4 +1,5 @@
 import styled, { StyledComponentBase, css } from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface ICon extends StyledComponentBase<any, {}> {
   Bar?: any
@@ -14,6 +15,7 @@ const Con: ICon = styled.section<IProps>`
   display: flex;
   gap: 0.7rem;
   align-items: center;
+  height: 100%;
   ${(props) =>
     props.isFocus &&
     css`
@@ -25,7 +27,7 @@ const Con: ICon = styled.section<IProps>`
 
 const bar = styled.div`
   border-radius: 50%;
-  padding: 0.5rem;
+  padding: 0.5em;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -37,19 +39,20 @@ const bar = styled.div`
   }
 `
 const iconSize = 32
-const icon = styled.span`
-  cursor: pointer;
-  display: grid;
+const icon = styled.button<IProps>`
+  display: ${(props) => (props.isFocus ? 'none' : 'grid')};
   place-content: center;
   border-radius: 50%;
+  border: none;
+  padding: ${(props) => (props.isFocus ? '.5em' : '0')};
   @media only screen and (max-width: ${(props) => props.theme.device.md}) {
     width: ${iconSize}px;
     height: ${iconSize}px;
     background: ${(props) => props.theme.palette.common.grey.normal};
   }
 `
-const input = styled.input`
-  display: none;
+const input = styled.input<IProps>`
+  display: ${(props) => (props.isFocus ? 'grid' : 'none')};
   outline: none;
   border: none;
   background: transparent;

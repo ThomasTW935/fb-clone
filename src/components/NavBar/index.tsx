@@ -19,12 +19,8 @@ export default function NavBar() {
       {/* Left */}
       <Nav.Left>
         {!searchOnFocus && (
-          <button className='logo'>
-            <FontAwesomeIcon
-              className='logo__icon'
-              icon={faFacebook}
-              size='2x'
-            />
+          <button style={{ border: 'none', background: 'none' }}>
+            <FontAwesomeIcon icon={faFacebook} size='2x' />
           </button>
         )}
         <SearchBar />
