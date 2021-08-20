@@ -52,7 +52,11 @@ export default function Post({ post }: IProps) {
             <FontAwesomeIcon icon={faEllipsisH} />
           </button>
           {openActions && (
-            <PostActions postId={post._id} setOpenActions={setOpenActions} />
+            <PostActions
+              postId={post._id}
+              user={user}
+              setOpenActions={setOpenActions}
+            />
           )}
         </Con.Actions>
       </Con.Head>
