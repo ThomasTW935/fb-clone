@@ -7,9 +7,11 @@ import {
   faEllipsisH,
   faGlobeAsia,
   faLock,
+  faShare,
 } from '@fortawesome/free-solid-svg-icons'
 import { dateFormatter } from '../../helper/dateFormatter'
 import PostActions from './PostActions'
+import { faComment, faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 
 interface IProps {
   post: IPost
@@ -61,7 +63,32 @@ export default function Post({ post }: IProps) {
         </Con.Actions>
       </Con.Head>
       <Con.Body>{post.content}</Con.Body>
-      <Con.Footer></Con.Footer>
+      <Con.Footer>
+        <Con.Footer.Reactions>
+          <div>
+            <FontAwesomeIcon icon={faThumbsUp} />
+            <span>25</span>
+          </div>
+          <div>
+            <span>25 Comments</span>
+            <span>25 Shares</span>
+          </div>
+        </Con.Footer.Reactions>
+        <Con.Footer.Actions>
+          <Con.Footer.Button>
+            <FontAwesomeIcon icon={faThumbsUp} color='black' />
+            <span>Like</span>
+          </Con.Footer.Button>
+          <Con.Footer.Button>
+            <FontAwesomeIcon icon={faComment} />
+            <span>Comment</span>
+          </Con.Footer.Button>
+          <Con.Footer.Button>
+            <FontAwesomeIcon icon={faShare} />
+            <span>Share</span>
+          </Con.Footer.Button>
+        </Con.Footer.Actions>
+      </Con.Footer>
     </Con>
   )
 }

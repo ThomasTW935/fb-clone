@@ -1,6 +1,7 @@
 import styled, { StyledComponentBase } from 'styled-components'
 import ImgCon from '../../core-ui/image/Profile-Rounded'
 import baseListStyle from '../../core-ui/List.style'
+import Footer from './Footer.style'
 
 interface ICon extends StyledComponentBase<any, {}> {
   Head?: any
@@ -66,12 +67,12 @@ const list = styled(baseListStyle)`
 `
 
 const body = styled.section``
-const footer = styled.section``
+// const footer = styled.section``
 
 Con.Head = head
 Con.Actions = actions
 Con.Body = body
-Con.Footer = footer
+Con.Footer = Footer
 Con.ImgCon = ImgCon
 Con.List = list
 
