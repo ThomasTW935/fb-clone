@@ -1,6 +1,6 @@
 import { useContext, createContext, Dispatch } from 'react'
 import Posts from '../components/Post'
-import { IPost } from '../interfaces'
+import { IPost, EReact, IUser } from '../interfaces'
 
 export enum POST_ACTIONS {
   SET_POSTS = 'set-posts',
@@ -8,6 +8,8 @@ export enum POST_ACTIONS {
   UPDATE_POST = 'update-post',
   SET_SELECTED_POST = 'set-selected-post',
   DELETE_POST = 'delete-post',
+  ADD_REACT = 'add-react',
+  REMOVE_REACT = 'remove-react',
 }
 
 type Reducer<TState, TAction> = (state: TState, action: TAction) => TState
@@ -23,6 +25,14 @@ type TAction =
   | { type: POST_ACTIONS.UPDATE_POST; payload: IPost }
   | { type: POST_ACTIONS.SET_SELECTED_POST; payload: string }
   | { type: POST_ACTIONS.DELETE_POST; payload: string }
+  | {
+      type: POST_ACTIONS.ADD_REACT
+      payload: { postId: string; react: EReact; user: IUser }
+    }
+  | {
+      type: POST_ACTIONS.REMOVE_REACT
+      payload: { postId: string; userId: string }
+    }
 
 export const initialPostState: TState = {
   posts: [],
@@ -67,6 +77,33 @@ export const PostReducer: Reducer<TState, TAction> = (state, action) => {
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== action.payload),
+      }
+    case POST_ACTIONS.ADD_REACT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id !== action.payload.postId) return post
+          return {
+            ...post,
+            reactions: [
+              ...post.reactions,
+              { react: action.payload.react, user: action.payload.user },
+            ],
+          }
+        }),
+      }
+    case POST_ACTIONS.REMOVE_REACT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id !== action.payload.postId) return post
+          return {
+            ...post,
+            reactions: post.reactions.filter(
+              (reaction) => reaction.user._id !== action.payload.userId
+            ),
+          }
+        }),
       }
     default:
       return state

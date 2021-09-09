@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { FormEvent, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useState } from 'react'
 import { usePostContext, POST_ACTIONS } from '../context/PostContext'
 import { postsApi } from '../config/apiRoutes'
+import { IReaction, EReact } from '../interfaces'
+import { useAuth } from '../auth/AuthContext'
 
 interface IPost {
   privacy: String
@@ -13,6 +14,7 @@ interface IPost {
 const usePost = () => {
   const [loading, setLoading] = useState(false)
   const { postDispatch } = usePostContext()
+  const { getUser } = useAuth()
 
   const handleCreatePost = async (postData: IPost) => {
     setLoading(true)
@@ -53,7 +55,47 @@ const usePost = () => {
       console.log({ error: err })
     }
   }
-  return { loading, handleCreatePost, handleEditPost, handleDeletePost }
+  const handleReactions = async (
+    postId: string,
+    userId: string,
+    react: string,
+    reactions: IReaction[]
+  ) => {
+    setLoading(true)
+    try {
+      setLoading(false)
+      await axios.put(postsApi + `/${postId}/reactions`, {
+        userId: userId,
+        react: react,
+      })
+      const filterReactions = reactions.find(
+        (reaction: IReaction) => reaction.user._id.toString() === userId
+      )
+      if (filterReactions === undefined && react === '')
+        return console.log({ error: 'react to a post' })
+
+      if (filterReactions !== undefined && react === '')
+        return postDispatch({
+          type: POST_ACTIONS.REMOVE_REACT,
+          payload: { postId: postId, userId: userId },
+        })
+
+      postDispatch({
+        type: POST_ACTIONS.ADD_REACT,
+        payload: { postId: postId, react: react as EReact, user: getUser() },
+      })
+    } catch (err) {
+      setLoading(false)
+      console.log({ error: err })
+    }
+  }
+  return {
+    loading,
+    handleCreatePost,
+    handleEditPost,
+    handleDeletePost,
+    handleReactions,
+  }
 }
 
 export default usePost
