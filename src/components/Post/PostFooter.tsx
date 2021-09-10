@@ -9,7 +9,7 @@ import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Footer from './PostFooter.style'
 import { useAuth } from '../../auth/AuthContext'
-import { IPost, EReact } from '../../interfaces'
+import { IPost, EReact, IUser } from '../../interfaces'
 import usePost from '../../hooks/usePost'
 
 interface IProps {
@@ -57,13 +57,36 @@ export default function PostFooter({ post }: IProps) {
     setReact(label)
     handleReactions(postId, currentUser._id, label, reactions)
   }
+  function reactionStat() {
+    const groupedReactions = reactions.reduce<{ [key: string]: IUser[] }>(
+      (groupedReactions, reaction) => {
+        const { react, user } = reaction
+        if (!groupedReactions[react]) groupedReactions[react] = []
+        groupedReactions[react].push(user)
+        return groupedReactions
+      },
+      {}
+    )
+    const filterReactions = reacts.filter((react) => {
+      const filterGroupedReactions = Object.keys(groupedReactions).filter(
+        (key) => react.label === key
+      )
+      return filterGroupedReactions[0] === react.label
+    })
+
+    return { groupedReactions, filterReactions }
+  }
+  const { groupedReactions, filterReactions } = reactionStat()
   return (
     <Footer>
       <Footer.Stats>
         <section>
           {reactions.length > 0 && (
             <div>
-              <FontAwesomeIcon icon={faThumbsUp} color={'#0572E6'} />
+              {filterReactions.map((react) => (
+                <FontAwesomeIcon icon={react.icon} color={react.bgColor} />
+              ))}
+
               <span>{reactions.length}</span>
             </div>
           )}
