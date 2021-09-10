@@ -79,6 +79,11 @@ const usePost = () => {
           type: POST_ACTIONS.REMOVE_REACT,
           payload: { postId: postId, userId: userId },
         })
+      if (filterReactions !== undefined && react !== '')
+        return postDispatch({
+          type: POST_ACTIONS.UPDATE_REACT,
+          payload: { postId: postId, userId: userId, react: react as EReact },
+        })
 
       postDispatch({
         type: POST_ACTIONS.ADD_REACT,

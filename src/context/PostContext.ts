@@ -9,6 +9,7 @@ export enum POST_ACTIONS {
   SET_SELECTED_POST = 'set-selected-post',
   DELETE_POST = 'delete-post',
   ADD_REACT = 'add-react',
+  UPDATE_REACT = 'update-react',
   REMOVE_REACT = 'remove-react',
 }
 
@@ -28,6 +29,10 @@ type TAction =
   | {
       type: POST_ACTIONS.ADD_REACT
       payload: { postId: string; react: EReact; user: IUser }
+    }
+  | {
+      type: POST_ACTIONS.UPDATE_REACT
+      payload: { postId: string; userId: string; react: EReact }
     }
   | {
       type: POST_ACTIONS.REMOVE_REACT
@@ -89,6 +94,20 @@ export const PostReducer: Reducer<TState, TAction> = (state, action) => {
               ...post.reactions,
               { react: action.payload.react, user: action.payload.user },
             ],
+          }
+        }),
+      }
+    case POST_ACTIONS.UPDATE_REACT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id !== action.payload.postId) return post
+          return {
+            ...post,
+            reactions: post.reactions.map((reaction) => {
+              if (reaction.user._id !== action.payload.userId) return reaction
+              return { ...reaction, react: action.payload.react }
+            }),
           }
         }),
       }
