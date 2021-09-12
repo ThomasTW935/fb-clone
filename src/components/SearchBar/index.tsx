@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { faArrowLeft, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Con from './SearchBar,style'
-import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 
 export default function SearchBar() {
   const [onFocus, setOnFocus] = useState(false)

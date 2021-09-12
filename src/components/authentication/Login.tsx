@@ -1,5 +1,4 @@
-import React, { FormEvent, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { FormEvent, useRef } from 'react'
 import useUser from '../../hooks/useUser'
 import Con from './Authentication.style'
 

@@ -1,5 +1,4 @@
 import styled, { StyledComponentBase, css } from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface ICon extends StyledComponentBase<any, {}> {
   Bar?: any

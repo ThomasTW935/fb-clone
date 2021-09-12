@@ -1,5 +1,4 @@
 import { useContext, createContext, Dispatch } from 'react'
-import Posts from '../components/Post'
 import { IPost, EReact, IUser } from '../interfaces'
 
 export enum POST_ACTIONS {
