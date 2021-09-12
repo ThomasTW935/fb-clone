@@ -9,7 +9,7 @@ import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Footer from './PostFooter.style'
 import { useAuth } from '../../auth/AuthContext'
-import { IPost, EReact, IUser } from '../../interfaces'
+import { IPost, IUser } from '../../interfaces'
 import usePost from '../../hooks/usePost'
 
 interface IProps {
@@ -82,13 +82,21 @@ export default function PostFooter({ post }: IProps) {
       <Footer.Stats>
         <section>
           {reactions.length > 0 && (
-            <div>
+            <Footer.Stats.Reactions>
               {filterReactions.map((react) => (
-                <FontAwesomeIcon icon={react.icon} color={react.bgColor} />
+                <Footer.Stats.React>
+                  <FontAwesomeIcon icon={react.icon} color={react.bgColor} />
+                  <Footer.Stats.List>
+                    <span>{react.label}</span>
+                    {groupedReactions[react.label].map((user) => (
+                      <li>{`${user.first_name} ${user.last_name}`}</li>
+                    ))}
+                  </Footer.Stats.List>
+                </Footer.Stats.React>
               ))}
 
               <span>{reactions.length}</span>
-            </div>
+            </Footer.Stats.Reactions>
           )}
         </section>
         <div>

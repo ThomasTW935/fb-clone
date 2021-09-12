@@ -1,5 +1,5 @@
 import styled, { StyledComponentBase } from 'styled-components'
-
+import Stats from './PostFooterStats.style'
 interface IFooter extends StyledComponentBase<any, {}> {
   Actions?: any
   Stats?: any
@@ -9,16 +9,6 @@ interface IFooter extends StyledComponentBase<any, {}> {
 }
 
 const Footer: IFooter = styled.section``
-
-const stats = styled.div`
-  display: flex;
-  justify-content: space-between;
-  div {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-`
 
 const actions = styled.div`
   display: flex;
@@ -116,7 +106,7 @@ const react = styled.li<IReact>`
 `
 
 Footer.Actions = actions
-Footer.Stats = stats
+Footer.Stats = Stats
 Footer.Button = button
 Footer.Reactions = reactions
 Footer.React = react
