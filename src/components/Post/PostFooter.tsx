@@ -83,13 +83,15 @@ export default function PostFooter({ post }: IProps) {
         <section>
           {reactions.length > 0 && (
             <Footer.Stats.Reactions>
-              {filterReactions.map((react) => (
-                <Footer.Stats.React>
+              {filterReactions.map((react, index) => (
+                <Footer.Stats.React key={index}>
                   <FontAwesomeIcon icon={react.icon} color={react.bgColor} />
                   <Footer.Stats.List>
                     <span>{react.label}</span>
-                    {groupedReactions[react.label].map((user) => (
-                      <li>{`${user.first_name} ${user.last_name}`}</li>
+                    {groupedReactions[react.label].map((user, index) => (
+                      <li
+                        key={index}
+                      >{`${user.first_name} ${user.last_name}`}</li>
                     ))}
                   </Footer.Stats.List>
                 </Footer.Stats.React>
@@ -107,8 +109,9 @@ export default function PostFooter({ post }: IProps) {
       <Footer.Actions>
         <div>
           <Footer.Reactions>
-            {reacts.map((react) => (
+            {reacts.map((react, index) => (
               <Footer.React
+                key={index}
                 bgColor={react.bgColor}
                 onClick={() => {
                   setReaction(react.label)
