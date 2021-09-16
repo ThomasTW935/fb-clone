@@ -13,12 +13,13 @@ interface IReaction {
   react: EReact
 }
 interface IPost {
-  privacy: string
-  content: string
   _id: string
-  createdAt: string
+  privacy: string
   user: IUser
+  content: string
+  image: string
   reactions: IReaction[]
+  createdAt: string
 }
 
 interface IUserData {

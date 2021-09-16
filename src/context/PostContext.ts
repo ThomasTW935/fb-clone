@@ -5,6 +5,7 @@ export enum POST_ACTIONS {
   SET_POSTS = 'set-posts',
   ADD_POST = 'add-post',
   UPDATE_POST = 'update-post',
+  UPDATE_POST_IMAGE = 'update-post-image',
   SET_SELECTED_POST = 'set-selected-post',
   DELETE_POST = 'delete-post',
   ADD_REACT = 'add-react',
@@ -23,6 +24,10 @@ type TAction =
   | { type: POST_ACTIONS.SET_POSTS; payload: IPost[] }
   | { type: POST_ACTIONS.ADD_POST; payload: IPost }
   | { type: POST_ACTIONS.UPDATE_POST; payload: IPost }
+  | {
+      type: POST_ACTIONS.UPDATE_POST_IMAGE
+      payload: { _id: string; image: string }
+    }
   | { type: POST_ACTIONS.SET_SELECTED_POST; payload: string }
   | { type: POST_ACTIONS.DELETE_POST; payload: string }
   | {
@@ -75,6 +80,14 @@ export const PostReducer: Reducer<TState, TAction> = (state, action) => {
         posts: state.posts.map((post) => {
           if (post._id !== action.payload._id) return post
           return action.payload
+        }),
+      }
+    case POST_ACTIONS.UPDATE_POST_IMAGE:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id !== action.payload._id) return post
+          return { ...post, image: action.payload.image }
         }),
       }
     case POST_ACTIONS.DELETE_POST:

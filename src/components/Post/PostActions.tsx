@@ -28,8 +28,6 @@ function PostActions({ postId, user, setOpenActions }: IProps) {
     handleDeletePost(postId)
     setOpenActions(false)
   }
-  console.log(user)
-  console.log(currentUser._id === user._id)
   return (
     <Con.List>
       {currentUser._id === user._id && (

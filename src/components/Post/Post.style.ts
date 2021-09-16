@@ -11,12 +11,15 @@ interface ICon extends StyledComponentBase<any, {}> {
 
 const Con: ICon = styled.div`
   background: white;
-  padding: 0.5rem 1rem;
   margin: 1rem;
   border-radius: 10px;
+  padding: 0.5rem 0;
   box-shadow: ${(props) => props.theme.boxShadow};
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   & > section {
-    margin-bottom: 0.5rem;
+    padding: 0 1rem;
   }
 `
 
@@ -63,7 +66,12 @@ const list = styled(baseListStyle)`
   }
 `
 
-const body = styled.section``
+const body = styled.div`
+  padding: 0;
+  p {
+    padding: 0 1rem 0.5rem;
+  }
+`
 
 Con.Head = head
 Con.Actions = actions

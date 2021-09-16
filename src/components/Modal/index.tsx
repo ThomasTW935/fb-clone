@@ -1,19 +1,19 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useAuth } from '../../auth/AuthContext'
 import { usePostContext, POST_ACTIONS } from '../../context/PostContext'
 import { useUIContext, UI_ACTIONS } from '../../context/UIContext'
 import usePost from '../../hooks/usePost'
 import Con from './Modal.style'
 
 export default function Modal() {
-  const { currentUser } = useAuth()
   const { postState, postDispatch } = usePostContext()
   const { uiState, uiDispatch } = useUIContext()
   const [postData, setPostData] = useState({
     privacy: 'Public',
     content: '',
-    userId: currentUser._id,
+    userId: '',
+    image: '',
   })
+  const [file, setFile] = useState<File>()
   const { loading, handleCreatePost, handleEditPost } = usePost()
 
   function closeModal() {
@@ -27,17 +27,22 @@ export default function Modal() {
       content: e.target.value,
     })
   }
+  function handleMedia(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files !== null) {
+      const file = e.target.files[0]
+      setFile(file)
+    }
+  }
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (postState.selectedPost !== '') {
-      handleEditPost(postState.selectedPost, postData)
+      handleEditPost(postState.selectedPost, postData, file)
       closeModal()
       return
     }
-    handleCreatePost(postData)
+    handleCreatePost(postData, file)
     closeModal()
   }
-
   useEffect(() => {
     if (postState.selectedPost !== '') {
       const post = postState.posts.filter(
@@ -47,6 +52,7 @@ export default function Modal() {
         privacy: post.privacy,
         content: post.content,
         userId: post.user._id,
+        image: post.image,
       })
     }
   }, [postState.selectedPost])
@@ -67,6 +73,10 @@ export default function Modal() {
                 placeholder="What's on your mind?"
                 value={postData.content}
               />
+              <label>
+                Upload File
+                <input type='file' onChange={handleMedia} />
+              </label>
               <button disabled={loading}>{button}</button>
             </Con.Body>
           </Con.Form>

@@ -4,6 +4,7 @@ import { usePostContext, POST_ACTIONS } from '../context/PostContext'
 import { postsApi } from '../config/apiRoutes'
 import { IReaction, EReact } from '../interfaces'
 import { useAuth } from '../auth/AuthContext'
+import { storage } from '../firebase'
 
 interface IPost {
   privacy: String
@@ -14,20 +15,32 @@ interface IPost {
 const usePost = () => {
   const [loading, setLoading] = useState(false)
   const { postDispatch } = usePostContext()
-  const { getUser } = useAuth()
+  const { getUser, currentUser } = useAuth()
 
-  const handleCreatePost = async (postData: IPost) => {
+  const handleCreatePost = async (postData: IPost, file: File | undefined) => {
     setLoading(true)
     try {
-      const response = await axios.post(postsApi, postData)
-      postDispatch({ type: POST_ACTIONS.ADD_POST, payload: response.data.post })
+      postData.userId = currentUser._id
+      const response = await axios.post(postsApi, {
+        ...postData,
+        hasMedia: file !== undefined,
+      })
+      const post = response.data.post
+      postDispatch({ type: POST_ACTIONS.ADD_POST, payload: post })
+      if (file !== undefined) {
+        handleImagePost(post._id, file)
+      }
       setLoading(false)
     } catch (err) {
       setLoading(false)
       console.log({ error: err })
     }
   }
-  const handleEditPost = async (id: string, postData: IPost) => {
+  const handleEditPost = async (
+    id: string,
+    postData: IPost,
+    file: File | undefined
+  ) => {
     setLoading(true)
     try {
       const response = await axios.put(postsApi + `/${id}`, postData)
@@ -35,7 +48,35 @@ const usePost = () => {
         type: POST_ACTIONS.UPDATE_POST,
         payload: response.data.post,
       })
+      if (file !== undefined) {
+        handleImagePost(id, file)
+      }
       setLoading(false)
+    } catch (err) {
+      setLoading(false)
+      console.log({ error: err })
+    }
+  }
+  const handleImagePost = async (id: string, file: File) => {
+    setLoading(true)
+    try {
+      const uploadTask = storage.ref(`/photos/${file.name}`).put(file)
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {},
+        () => {},
+        async () => {
+          const url = await uploadTask.snapshot.ref.getDownloadURL()
+          await axios.put(postsApi + `/${id}/photo`, {
+            image: url,
+          })
+          postDispatch({
+            type: POST_ACTIONS.UPDATE_POST_IMAGE,
+            payload: { _id: id, image: url },
+          })
+          setLoading(false)
+        }
+      )
     } catch (err) {
       setLoading(false)
       console.log({ error: err })

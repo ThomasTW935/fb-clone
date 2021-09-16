@@ -61,7 +61,10 @@ export default function Post({ post }: IProps) {
           )}
         </Con.Actions>
       </Con.Head>
-      <Con.Body>{post.content}</Con.Body>
+      <Con.Body>
+        {post.content && <p>{post.content}</p>}
+        {post.image && <img src={post.image} alt='NBA 2k21' />}
+      </Con.Body>
       <PostFooter post={post} />
     </Con>
   )
