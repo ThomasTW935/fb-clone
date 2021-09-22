@@ -44,7 +44,7 @@ const useUser = () => {
       const firebaseResponse = await signup(userData.email, userData.password)
       const newUser = {
         firstName: userData.first_name,
-        lastName: userData.first_name,
+        lastName: userData.last_name,
         firebase_uid: firebaseResponse.user.uid,
       }
       await axios.post(usersApi, newUser)
