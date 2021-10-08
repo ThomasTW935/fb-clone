@@ -1,6 +1,6 @@
-import { FormEvent, useRef } from 'react'
-import useUser from '../../hooks/useUser'
-import Con from './Authentication.style'
+import { FormEvent, useRef } from "react"
+import useUser from "../../hooks/useUser"
+import Con from "./Authentication.style"
 
 type Props = {
   setIsLogin: (arg0: boolean) => void
@@ -19,6 +19,10 @@ export default function Login({ setIsLogin }: Props) {
     }
     handleLogin(userData)
   }
+  function handleTestAccountLogin(e: FormEvent) {
+    e.preventDefault()
+    handleLogin({ email: "thomastw935@gmail.com", password: "VA2038wm" })
+  }
 
   return (
     <Con>
@@ -27,23 +31,26 @@ export default function Login({ setIsLogin }: Props) {
         <span>{error}</span>
         <Con.Section>
           <label>Email</label>
-          <input type='text' ref={emailRef} required />
+          <input type="text" ref={emailRef} required />
         </Con.Section>
         <Con.Section>
           <label>Password</label>
-          <input type='password' ref={passwordRef} required />
+          <input type="password" ref={passwordRef} required />
         </Con.Section>
-        <Con.CTA disabled={loading} type='submit'>
+        <Con.CTA disabled={loading} type="submit">
           Login
+        </Con.CTA>
+        <Con.CTA type="button" onClick={handleTestAccountLogin}>
+          Test Account
         </Con.CTA>
       </Con.Form>
       <div>
-        Create an account here{' '}
+        Create an account here{" "}
         <Con.Button onClick={() => setIsLogin(false)}>Sign Up</Con.Button>
       </div>
       <div>
-        Forgot Password?{' '}
-        <Con.Link to='/forgot-password'>Reset Password</Con.Link>
+        Forgot Password?{" "}
+        <Con.Link to="/forgot-password">Reset Password</Con.Link>
       </div>
     </Con>
   )

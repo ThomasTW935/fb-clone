@@ -1,5 +1,5 @@
-import styled, { css, StyledComponentBase } from 'styled-components'
-import { Link } from 'react-router-dom'
+import styled, { css, StyledComponentBase } from "styled-components"
+import { Link } from "react-router-dom"
 
 interface ICon extends StyledComponentBase<any, {}> {
   Form?: any
@@ -10,7 +10,7 @@ interface ICon extends StyledComponentBase<any, {}> {
   Guide?: any
 }
 
-const linkColor = '#7e6bf2'
+const linkColor = "#7e6bf2"
 
 const Con: ICon = styled.div`
   background: white;
@@ -45,6 +45,10 @@ const cta = styled.button`
   color: white;
   padding: 0.55rem;
   margin: 1rem 0 0;
+  transition: 0.25s ease-in-out;
+  &:hover {
+    transform: scale(1.02);
+  }
 `
 
 const baseLink = css`

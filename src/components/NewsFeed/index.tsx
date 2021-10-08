@@ -1,10 +1,10 @@
-import React from 'react'
-import Con from './NewsFeed.style'
-import Posts from '../Post'
-import testImg from '../../assets/images/testImg.jpg'
-import { useAuth } from '../../auth/AuthContext'
-import { IPost } from '../../interfaces'
-import { UI_ACTIONS, useUIContext } from '../../context/UIContext'
+import React from "react"
+import Con from "./NewsFeed.style"
+import Posts from "../Post"
+import testImg from "../../assets/images/testImg.jpg"
+import { useAuth } from "../../auth/AuthContext"
+import { IPost } from "../../interfaces"
+import { UI_ACTIONS, useUIContext } from "../../context/UIContext"
 
 interface IProps {
   posts: IPost[]
@@ -20,10 +20,10 @@ export default function NewsFeed({ posts }: IProps) {
       <Con.Head>
         <section>
           <Con.ImgCon>
-            <Con.ImgCon.Img src={testImg} alt='profile' />
+            <Con.ImgCon.Img src={testImg} alt="profile" />
           </Con.ImgCon>
           <Con.Button onClick={() => handlePostModal(true)}>
-            What's on your mind, {currentUser.name}?
+            What's on your mind, {currentUser.first_name}?
           </Con.Button>
         </section>
         <section></section>
